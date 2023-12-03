@@ -1,0 +1,354 @@
+[gd_scene load_steps=42 format=3 uid="uid://c6q1l5fnlrdp6"]
+
+[ext_resource type="Texture2D" uid="uid://v66qp1vygenk" path="res://models/floor_albedo.png" id="1_rf5f1"]
+[ext_resource type="Texture2D" uid="uid://d1nocsu6ohs4d" path="res://models/floor_normal.png" id="2_i646b"]
+[ext_resource type="Texture2D" uid="uid://brx1yflcwuihf" path="res://models/floor_orm.png" id="3_og6rg"]
+[ext_resource type="Material" uid="uid://brmkofkf64u5r" path="res://models/walls.tres" id="4_ca530"]
+[ext_resource type="PackedScene" uid="uid://cyx1l7l20d3go" path="res://light.tscn" id="5_j335g"]
+[ext_resource type="ArrayMesh" uid="uid://dkc6nfvift6b5" path="res://models/bench2.obj" id="6_p24yt"]
+[ext_resource type="Material" uid="uid://chiihxip4rdrw" path="res://models/wood.tres" id="7_rdevi"]
+[ext_resource type="ArrayMesh" uid="uid://bms48lr73xgam" path="res://models/bench.obj" id="8_bl13s"]
+[ext_resource type="ArrayMesh" uid="uid://bol7uo6wtc66" path="res://models/bench3.obj" id="9_etp48"]
+[ext_resource type="PackedScene" uid="uid://4ev7vligewx2" path="res://scenes/sauna/screw_driver.tscn" id="10_jhok0"]
+[ext_resource type="PackedScene" uid="uid://c6rlrrlkumljy" path="res://scenes/sauna/bucket.tscn" id="11_k1x68"]
+[ext_resource type="ArrayMesh" uid="uid://cxj7cmrceew7v" path="res://models/pipe.obj" id="12_4skkf"]
+[ext_resource type="Texture2D" uid="uid://dybplhqr3d28i" path="res://models/sauna_t.png" id="13_v14ny"]
+[ext_resource type="Script" path="res://scenes/sauna/tap.gd" id="14_4ihj0"]
+[ext_resource type="Texture2D" uid="uid://dsh13vdmh2jsk" path="res://models/particle.png" id="15_c1uw8"]
+[ext_resource type="ArrayMesh" uid="uid://b6k3sbjjxxh4m" path="res://models/tap.obj" id="16_0vwsa"]
+[ext_resource type="Script" path="res://scenes/sauna/temperature.gd" id="17_0lpp2"]
+[ext_resource type="PackedScene" uid="uid://c5ep1hnxt2pjq" path="res://scenes/sauna/stove.tscn" id="18_dfjaf"]
+[ext_resource type="PackedScene" uid="uid://rjm4fpxp6tny" path="res://scenes/sauna/bottle.tscn" id="19_kx2xb"]
+[ext_resource type="PackedScene" uid="uid://b0xm6b1pl5sfx" path="res://scenes/sauna/cookie.tscn" id="20_balac"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_um7xg"]
+margin = 0.005
+size = Vector3(5, 0.2, 5)
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_s6ovo"]
+albedo_texture = ExtResource("1_rf5f1")
+orm_texture = ExtResource("3_og6rg")
+normal_enabled = true
+normal_texture = ExtResource("2_i646b")
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s8e8q"]
+material = SubResource("ORMMaterial3D_s6ovo")
+size = Vector2(5, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3gnn8"]
+material = ExtResource("4_ca530")
+size = Vector2(5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qau3s"]
+size = Vector3(5, 3, 0.2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1onqs"]
+lightmap_size_hint = Vector2i(0, 1860)
+material = ExtResource("4_ca530")
+size = Vector2(3, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ejk7e"]
+margin = 0.005
+size = Vector3(2.524, 0.53, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkhh5"]
+margin = 0.005
+size = Vector3(0.960048, 0.523193, 0.0856445)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3c06e"]
+margin = 0.005
+size = Vector3(5, 0.5, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2mb67"]
+margin = 0.005
+size = Vector3(1.63, 0.5, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp6bf"]
+albedo_texture = ExtResource("13_v14ny")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_herwy"]
+radius = 0.108554
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_766cu"]
+angle_min = -10.7
+angle_max = 279.4
+direction = Vector3(0, -1, 0)
+spread = 50.0
+initial_velocity_max = 0.05
+collision_use_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bmth"]
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.392157, 0.392157, 0.392157, 1)
+albedo_texture = ExtResource("15_c1uw8")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i4tnw"]
+material = SubResource("StandardMaterial3D_1bmth")
+size = Vector2(0.03, 0.03)
+orientation = 2
+
+[sub_resource type="Animation" id="Animation_wa2ew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2smys"]
+resource_name = "turn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tm44q"]
+_data = {
+"RESET": SubResource("Animation_wa2ew"),
+"turn": SubResource("Animation_2smys")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lvxt"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_m7o13"]
+material = SubResource("StandardMaterial3D_6lvxt")
+size = Vector2(0.03, 0.002)
+orientation = 0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p2hpd"]
+radius = 0.0216049
+
+[node name="SaunaScene" type="Node3D"]
+
+[node name="Sauna" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.07223)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_um7xg")
+
+[node name="Ground" type="MeshInstance3D" parent="Sauna/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("PlaneMesh_s8e8q")
+skeleton = NodePath("../..")
+
+[node name="Ceiling" type="MeshInstance3D" parent="Sauna"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, -4.37114e-08, -1, -4.37114e-08, -1, 4.37114e-08, 4.37114e-08, 0, 3, 0)
+mesh = SubResource("PlaneMesh_3gnn8")
+
+[node name="Light1" parent="Sauna/Ceiling" instance=ExtResource("5_j335g")]
+transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, -1, 0.08, 1)
+
+[node name="Light2" parent="Sauna/Ceiling" instance=ExtResource("5_j335g")]
+transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, 1, 0.08, 1)
+
+[node name="Light3" parent="Sauna/Ceiling" instance=ExtResource("5_j335g")]
+transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, -1, 0.08, -1)
+
+[node name="Light4" parent="Sauna/Ceiling" instance=ExtResource("5_j335g")]
+transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, 1, 0.08, -1)
+
+[node name="Wall1" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2.6)
+shape = SubResource("BoxShape3D_qau3s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Sauna/Wall1"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 0, 0, -0.0999999)
+mesh = SubResource("PlaneMesh_1onqs")
+skeleton = NodePath("../..")
+
+[node name="Wall2" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.6, 1.5, 2.38419e-07)
+shape = SubResource("BoxShape3D_qau3s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Sauna/Wall2"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, 0, -0.0999999)
+mesh = SubResource("PlaneMesh_1onqs")
+skeleton = NodePath("../..")
+
+[node name="Wall3" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, -2.6)
+shape = SubResource("BoxShape3D_qau3s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Sauna/Wall3"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, 0, -0.0999999)
+mesh = SubResource("PlaneMesh_1onqs")
+skeleton = NodePath("../..")
+
+[node name="Wall4" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.6, 1.5, 0)
+shape = SubResource("BoxShape3D_qau3s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Sauna/Wall4"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, 0, -0.0999999)
+mesh = SubResource("PlaneMesh_1onqs")
+skeleton = NodePath("../..")
+
+[node name="Bench11" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.834631, 0.25, 2.2)
+shape = SubResource("BoxShape3D_ejk7e")
+
+[node name="Model" type="MeshInstance3D" parent="Sauna/Bench11"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.840729, 0, 0)
+mesh = ExtResource("6_p24yt")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("7_rdevi")
+
+[node name="Bench12" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15923, 0.25, 2.2)
+shape = SubResource("BoxShape3D_ejk7e")
+
+[node name="Bench13" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.808283, 0.119385, 2.2)
+shape = SubResource("BoxShape3D_ejk7e")
+
+[node name="Bench14" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65396, 0.242065, 1.94282)
+shape = SubResource("BoxShape3D_vkhh5")
+
+[node name="Bench15" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65396, 0.242065, 2.44236)
+shape = SubResource("BoxShape3D_vkhh5")
+
+[node name="Bench2" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.2, 0.25, 0)
+shape = SubResource("BoxShape3D_3c06e")
+
+[node name="Model" type="MeshInstance3D" parent="Sauna/Bench2"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("8_bl13s")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("7_rdevi")
+surface_material_override/1 = ExtResource("7_rdevi")
+
+[node name="Bench3" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -2.2)
+shape = SubResource("BoxShape3D_3c06e")
+
+[node name="Model" type="MeshInstance3D" parent="Sauna/Bench3"]
+mesh = ExtResource("8_bl13s")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("7_rdevi")
+surface_material_override/1 = ExtResource("7_rdevi")
+
+[node name="Bench4" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2, 0.25, 1.96518)
+shape = SubResource("BoxShape3D_2mb67")
+
+[node name="Model" type="MeshInstance3D" parent="Sauna/Bench4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95205, 0, 0)
+mesh = ExtResource("9_etp48")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("7_rdevi")
+
+[node name="Bench5" type="CollisionShape3D" parent="Sauna"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2, 0.25, -1.67249)
+shape = SubResource("BoxShape3D_2mb67")
+
+[node name="Model" type="MeshInstance3D" parent="Sauna/Bench5"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67668, 0, -4.76837e-07)
+mesh = ExtResource("9_etp48")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("7_rdevi")
+
+[node name="ScrewDriver" parent="." instance=ExtResource("10_jhok0")]
+transform = Transform3D(0.0793116, 0, -0.99685, 0, 1, 0, 0.99685, 0, 0.0793116, 0.671458, 0.406309, 0.087864)
+
+[node name="Bucket" parent="." instance=ExtResource("11_k1x68")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68134, 0.199158, -0.778954)
+
+[node name="Pipe" type="Node3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Pipe"]
+transform = Transform3D(-3, 0, 4.52987e-07, 0, 3, 0, -4.52987e-07, 0, -3, -2.50413, 1.18681, -0.779836)
+mesh = ExtResource("12_4skkf")
+skeleton = NodePath("../../..")
+surface_material_override/3 = SubResource("StandardMaterial3D_dp6bf")
+
+[node name="Tap" type="StaticBody3D" parent="Pipe"]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -2.38026, 1.04264, -0.470467)
+script = ExtResource("14_4ihj0")
+
+[node name="Collision" type="CollisionShape3D" parent="Pipe/Tap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00808036, 0, 0)
+shape = SubResource("SphereShape3D_herwy")
+
+[node name="Particles" type="GPUParticles3D" parent="Pipe/Tap"]
+transform = Transform3D(1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.0559032, -0.074338, 9.53674e-06)
+emitting = false
+amount = 128
+lifetime = 0.27
+randomness = 0.8
+visibility_aabb = AABB(-0.5, -1, -0.5, 1, 1.2, 1)
+process_material = SubResource("ParticleProcessMaterial_766cu")
+draw_pass_1 = SubResource("PlaneMesh_i4tnw")
+
+[node name="Mesh" type="MeshInstance3D" parent="Pipe/Tap"]
+transform = Transform3D(3, 0, 1.33991e-05, 0, 3, 0, -1.33991e-05, 0, 3, 0, 0, 0)
+mesh = ExtResource("16_0vwsa")
+
+[node name="TapAnimation" type="AnimationPlayer" parent="Pipe/Tap"]
+libraries = {
+"": SubResource("AnimationLibrary_tm44q")
+}
+
+[node name="RayCast3D" type="RayCast3D" parent="Pipe/Tap"]
+transform = Transform3D(1, 0, -8.52651e-14, 0, 1, 0, 8.52651e-14, 0, 1, -0.0557048, -0.075704, 0)
+target_position = Vector3(0, -0.5, 0)
+collision_mask = 4294967295
+
+[node name="Temperature" type="Area3D" parent="Pipe"]
+transform = Transform3D(-3, 0, 4.52987e-07, 0, 3, 0, -4.52987e-07, 0, -3, -2.37212, 1.49, -0.784379)
+script = ExtResource("17_0lpp2")
+stove_path = NodePath("../../Stove")
+
+[node name="Pivot" type="Node3D" parent="Pipe/Temperature"]
+transform = Transform3D(1, 0, 0, 0, 0.809017, 0.587785, 0, -0.587785, 0.809017, 0, 0, 0)
+
+[node name="Hand" type="MeshInstance3D" parent="Pipe/Temperature/Pivot"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.00183105, 0, -0.0118713)
+mesh = SubResource("QuadMesh_m7o13")
+
+[node name="ScrewArea" type="CollisionShape3D" parent="Pipe/Temperature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00796509, -0.182983, 0)
+shape = SubResource("SphereShape3D_p2hpd")
+
+[node name="Stove" parent="." instance=ExtResource("18_dfjaf")]
+
+[node name="Bottle" parent="." instance=ExtResource("19_kx2xb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65395, 0.658661, -0.0279083)
+
+[node name="Cookie" parent="." instance=ExtResource("20_balac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.675726, 0.521851, 0.161339)
+
+[node name="Cookie2" parent="." instance=ExtResource("20_balac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.764929, 0.521851, 0.161339)
+
+[node name="Cookie3" parent="." instance=ExtResource("20_balac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715643, 0.518188, 0.0900502)
+
+[node name="Cookie4" parent="." instance=ExtResource("20_balac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715643, 0.543823, 0.134484)

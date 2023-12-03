@@ -1,0 +1,101 @@
+[gd_scene load_steps=15 format=3 uid="uid://dojfb14jk0aak"]
+
+[ext_resource type="Script" path="res://scenes/sauna/main.gd" id="1_ren5m"]
+[ext_resource type="Script" path="res://scenes/common/mouth.gd" id="2_1or30"]
+[ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="2_l6jxn"]
+[ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="3_exi65"]
+[ext_resource type="AudioStream" uid="uid://bodo55kk7n0u6" path="res://sounds/crunch.1.ogg" id="3_srebc"]
+[ext_resource type="PackedScene" uid="uid://dwefgiaunwbnn" path="res://scenes/common/telekinesis.tscn" id="5_sw2kw"]
+
+[sub_resource type="Gradient" id="Gradient_6wt6e"]
+offsets = PackedFloat32Array(0, 0.699275, 1)
+colors = PackedColorArray(0.72549, 0, 0, 0, 0.679015, 2.86378e-06, 2.88785e-07, 1, 0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_5bqmc"]
+offsets = PackedFloat32Array(0, 0.699275, 1)
+colors = PackedColorArray(4.81308e-08, 0.458538, 0.248484, 0, 0, 0.428763, 0.218099, 1, 0, 0, 0, 1)
+
+[sub_resource type="Environment" id="Environment_5d88d"]
+background_mode = 2
+ambient_light_source = 2
+ambient_light_color = Color(0.788235, 0.776471, 0.721569, 1)
+ambient_light_sky_contribution = 0.8
+ambient_light_energy = 0.02
+tonemap_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_h3h4e"]
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4idbq"]
+transparency = 1
+albedo_color = Color(0.760784, 0, 0.239216, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rnp22"]
+margin = 0.005
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7f72"]
+albedo_color = Color(0.407843, 0.14902, 0, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wpvu"]
+albedo_color = Color(0.407843, 0.14902, 0, 1)
+roughness = 0.5
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ren5m")
+effect_gradient_fire_death = SubResource("Gradient_6wt6e")
+effect_gradient_poison_death = SubResource("Gradient_5bqmc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5d88d")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.250623, 0, 0)
+
+[node name="XRHead" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+far = 20.0
+
+[node name="ViewEffect" type="MeshInstance3D" parent="XROrigin3D/XRHead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0716553)
+visible = false
+mesh = SubResource("QuadMesh_h3h4e")
+surface_material_override/0 = SubResource("StandardMaterial3D_4idbq")
+
+[node name="Mouth" type="Area3D" parent="XROrigin3D/XRHead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+collision_layer = 0
+collision_mask = 4294967295
+monitorable = false
+script = ExtResource("2_1or30")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="XROrigin3D/XRHead/Mouth"]
+shape = SubResource("SphereShape3D_rnp22")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="XROrigin3D/XRHead/Mouth"]
+stream = ExtResource("3_srebc")
+
+[node name="Music" type="AudioStreamPlayer3D" parent="XROrigin3D/XRHead"]
+
+[node name="XRLeftHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="XROrigin3D/XRLeftHand" instance=ExtResource("2_l6jxn")]
+hand_material_override = SubResource("StandardMaterial3D_r7f72")
+
+[node name="Telekinesis" parent="XROrigin3D/XRLeftHand" instance=ExtResource("5_sw2kw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="XRRightHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+
+[node name="RightHand" parent="XROrigin3D/XRRightHand" instance=ExtResource("3_exi65")]
+hand_material_override = SubResource("StandardMaterial3D_3wpvu")
+
+[node name="Telekinesis" parent="XROrigin3D/XRRightHand" instance=ExtResource("5_sw2kw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[connection signal="body_entered" from="XROrigin3D/XRHead/Mouth" to="XROrigin3D/XRHead/Mouth" method="_on_body_entered"]

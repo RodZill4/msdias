@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://b0xm6b1pl5sfx"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pmxej"]
+[ext_resource type="Script" path="res://scenes/sauna/cookie.gd" id="2_0o8oa"]
+[ext_resource type="ArrayMesh" uid="uid://c1jugd0gc4n35" path="res://models/cookie.obj" id="2_y4xk5"]
+[ext_resource type="Texture2D" uid="uid://dsh13vdmh2jsk" path="res://models/particle.png" id="4_0xpp5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yojk3"]
+margin = 0.005
+height = 0.0125793
+radius = 0.0434554
+
+[sub_resource type="Gradient" id="Gradient_o4l70"]
+offsets = PackedFloat32Array(0.0165017, 0.49835, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1.92523e-06, 0.652099, 0.45977, 1, 0, 0.329412, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3m8qp"]
+gradient = SubResource("Gradient_o4l70")
+
+[sub_resource type="Curve" id="Curve_i0eyn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.98386, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6nqxf"]
+curve = SubResource("Curve_i0eyn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3vybe"]
+lifetime_randomness = 0.57
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 0.025, 0)
+spread = 180.0
+initial_velocity_max = 0.2
+gravity = Vector3(0, 0.1, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_6nqxf")
+color_ramp = SubResource("GradientTexture1D_3m8qp")
+hue_variation_min = -0.11
+hue_variation_max = 0.11
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_id4my"]
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_0xpp5")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_tvhlp"]
+material = SubResource("StandardMaterial3D_id4my")
+size = Vector2(0.2, 0.2)
+
+[node name="Cookie" instance=ExtResource("1_pmxej")]
+mass = 0.1
+script = ExtResource("2_0o8oa")
+cookey = false
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("CylinderShape3D_yojk3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = ExtResource("2_y4xk5")
+
+[node name="PoisonGas" type="GPUParticles3D" parent="." index="2"]
+emitting = false
+amount = 64
+lifetime = 3.0
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = SubResource("ParticleProcessMaterial_3vybe")
+draw_pass_1 = SubResource("QuadMesh_tvhlp")
