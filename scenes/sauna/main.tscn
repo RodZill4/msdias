@@ -28,6 +28,7 @@ size = Vector2(0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4idbq"]
 transparency = 1
+shading_mode = 0
 albedo_color = Color(0.760784, 0, 0.239216, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rnp22"]

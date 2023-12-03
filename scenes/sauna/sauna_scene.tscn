@@ -1,16 +1,19 @@
-[gd_scene load_steps=50 format=3 uid="uid://c6q1l5fnlrdp6"]
+[gd_scene load_steps=56 format=3 uid="uid://c6q1l5fnlrdp6"]
 
 [ext_resource type="Texture2D" uid="uid://v66qp1vygenk" path="res://models/floor_albedo.png" id="1_rf5f1"]
+[ext_resource type="Script" path="res://scenes/sauna/sauna_scene.gd" id="1_upwxg"]
 [ext_resource type="Texture2D" uid="uid://d1nocsu6ohs4d" path="res://models/floor_normal.png" id="2_i646b"]
 [ext_resource type="Texture2D" uid="uid://brx1yflcwuihf" path="res://models/floor_orm.png" id="3_og6rg"]
 [ext_resource type="Material" uid="uid://brmkofkf64u5r" path="res://models/walls.tres" id="4_ca530"]
 [ext_resource type="PackedScene" uid="uid://cyx1l7l20d3go" path="res://light.tscn" id="5_j335g"]
+[ext_resource type="ArrayMesh" uid="uid://b1ahkn1i714ho" path="res://models/doors.obj" id="6_ma6cy"]
 [ext_resource type="ArrayMesh" uid="uid://dkc6nfvift6b5" path="res://models/bench2.obj" id="6_p24yt"]
 [ext_resource type="Material" uid="uid://chiihxip4rdrw" path="res://models/wood.tres" id="7_rdevi"]
 [ext_resource type="ArrayMesh" uid="uid://bms48lr73xgam" path="res://models/bench.obj" id="8_bl13s"]
 [ext_resource type="Script" path="res://scenes/sauna/bench_door.gd" id="8_ka2ea"]
 [ext_resource type="ArrayMesh" uid="uid://ccpkk3j6pkjws" path="res://models/bench2_door.obj" id="8_w0l3t"]
 [ext_resource type="ArrayMesh" uid="uid://bol7uo6wtc66" path="res://models/bench3.obj" id="9_etp48"]
+[ext_resource type="Texture2D" uid="uid://bqsh0j0mdh6cq" path="res://models/door_writing.png" id="9_jleff"]
 [ext_resource type="ArrayMesh" uid="uid://cwjam85vhc3fy" path="res://models/bench2_key.obj" id="9_oh2g6"]
 [ext_resource type="PackedScene" uid="uid://4ev7vligewx2" path="res://scenes/sauna/screw_driver.tscn" id="10_jhok0"]
 [ext_resource type="PackedScene" uid="uid://c6rlrrlkumljy" path="res://scenes/sauna/bucket.tscn" id="11_k1x68"]
@@ -23,6 +26,12 @@
 [ext_resource type="PackedScene" uid="uid://c5ep1hnxt2pjq" path="res://scenes/sauna/stove.tscn" id="18_dfjaf"]
 [ext_resource type="PackedScene" uid="uid://rjm4fpxp6tny" path="res://scenes/sauna/bottle.tscn" id="19_kx2xb"]
 [ext_resource type="PackedScene" uid="uid://b0xm6b1pl5sfx" path="res://scenes/sauna/cookie.tscn" id="20_balac"]
+
+[sub_resource type="Gradient" id="Gradient_d47og"]
+colors = PackedColorArray(0.666569, 0.666569, 0.666569, 0, 0.877616, 0.877616, 0.877616, 1)
+
+[sub_resource type="Gradient" id="Gradient_pfu2k"]
+colors = PackedColorArray(0.877616, 0.877616, 0.877616, 1, 0.666667, 0.666667, 0.666667, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_um7xg"]
 margin = 0.005
@@ -50,6 +59,15 @@ size = Vector3(5, 3, 0.2)
 lightmap_size_hint = Vector2i(0, 1860)
 material = ExtResource("4_ca530")
 size = Vector2(3, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qb56"]
+resource_local_to_scene = true
+albedo_color = Color(0.384314, 0.454902, 0.466667, 1)
+roughness = 0.0
+roughness_texture = ExtResource("9_jleff")
+uv1_scale = Vector3(3.095, 3.095, 3.095)
+uv1_offset = Vector3(-1.075, -0.275, 0)
+texture_repeat = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ejk7e"]
 margin = 0.005
@@ -187,6 +205,9 @@ orientation = 0
 radius = 0.0216049
 
 [node name="SaunaScene" type="Node3D"]
+script = ExtResource("1_upwxg")
+effect_gradient_vapor_in = SubResource("Gradient_d47og")
+effect_gradient_vapor_out = SubResource("Gradient_pfu2k")
 
 [node name="Sauna" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.07223)
@@ -208,7 +229,7 @@ mesh = SubResource("PlaneMesh_3gnn8")
 transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, -1, 0.08, 1)
 
 [node name="Light2" parent="Sauna/Ceiling" instance=ExtResource("5_j335g")]
-transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, 1, 0.08, 1)
+transform = Transform3D(1, 6.03961e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -7.10543e-14, 1, -4.37114e-08, 1, 0.08, 1)
 
 [node name="Light3" parent="Sauna/Ceiling" instance=ExtResource("5_j335g")]
 transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, -1, 0.08, -1)
@@ -252,6 +273,12 @@ transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e
 mesh = SubResource("PlaneMesh_1onqs")
 skeleton = NodePath("../..")
 
+[node name="Doors" type="MeshInstance3D" parent="Sauna/Wall4/Mesh"]
+transform = Transform3D(1.42109e-14, 1, 8.74228e-08, -7.10543e-15, -8.74228e-08, 1, 1, -7.10543e-15, 0, -1.49512, 0, 0)
+mesh = ExtResource("6_ma6cy")
+surface_material_override/0 = ExtResource("7_rdevi")
+surface_material_override/1 = SubResource("StandardMaterial3D_8qb56")
+
 [node name="Bench11" type="CollisionShape3D" parent="Sauna"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.834631, 0.25, 2.2)
 shape = SubResource("BoxShape3D_ejk7e")
@@ -267,7 +294,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.923859, 0.252319, 0.009948
 script = ExtResource("8_ka2ea")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sauna/Bench11/Model/Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sauna/Bench11/Model/Door/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.251465, 0, 2.23517e-08)
@@ -437,3 +464,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715643, 0.533096, 0.090050
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715643, 0.558731, 0.134484)
 
 [connection signal="body_entered" from="Sauna/Bench11/Model/Door/StaticBody3D/KeyDetect" to="Sauna/Bench11/Model/Door" method="_on_key_detect_body_entered"]
+[connection signal="vapor" from="Stove" to="." method="_on_stove_vapor"]

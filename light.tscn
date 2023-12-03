@@ -8,14 +8,15 @@ shading_mode = 0
 [node name="Light1" type="SpotLight3D"]
 transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, -1.08539, 0.0780497, 1.16248)
 light_color = Color(0.901961, 0.886275, 0.737255, 1)
-light_energy = 6.072
+light_energy = 3.0
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
-light_size = 0.205
+light_size = 0.204
+light_specular = 1.5
 light_bake_mode = 0
 spot_range = 4.769
-spot_attenuation = 2.82843
-spot_angle = 94.55
+spot_attenuation = 2.5
+spot_angle = 100.0
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, -1.74845e-07, -7.64274e-15, 0, -8.74228e-08, 2, -1.74845e-07, -2, -8.74228e-08, 0, 0, 0.0759277)

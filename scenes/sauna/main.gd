@@ -73,6 +73,12 @@ var current_effect_gradient : Gradient
 var current_effect_duration : float
 var current_effect_progress : float
 
+func view_effect(g : Gradient, d : float = 1.0, keep : bool = false):
+	start_view_effect(g, d)
+	await self.effect_finished
+	if not keep : 
+		$XROrigin3D/XRHead/ViewEffect.visible = false
+
 func start_view_effect(g : Gradient, d : float = 1.0):
 	current_effect_gradient = g
 	current_effect_duration = d
@@ -82,8 +88,9 @@ func start_view_effect(g : Gradient, d : float = 1.0):
 	set_process(true)
 
 func _process(delta):
-	current_effect_progress += delta/current_effect_duration
-	$XROrigin3D/XRHead/ViewEffect.get_surface_override_material(0).albedo_color = current_effect_gradient.sample(current_effect_progress)
-	if current_effect_progress > 1.0:
+	current_effect_progress += delta
+	print(current_effect_progress)
+	$XROrigin3D/XRHead/ViewEffect.get_surface_override_material(0).albedo_color = current_effect_gradient.sample(current_effect_progress/current_effect_duration)
+	if current_effect_progress > current_effect_duration:
 		set_process(false)
 		self.effect_finished.emit()

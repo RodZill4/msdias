@@ -28,7 +28,9 @@ func _process(delta):
 	stove.set_temperature(temperature)
 	if temperature < 30.0:
 		temperature = 30
-		set_process(false)
+		if increase < 0:
+			set_process(false)
+			get_node("/root/Main").die("")
 	elif temperature > 140.0:
 		set_process(false)
 		get_node("/root/Main").die("excessive heat")

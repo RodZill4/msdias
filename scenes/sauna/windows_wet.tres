@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dvbnhkkardft7"]
+
+[ext_resource type="Texture2D" uid="uid://bqsh0j0mdh6cq" path="res://models/door_writing.png" id="1_mkdo6"]
+
+[resource]
+albedo_color = Color(0.384314, 0.454902, 0.466667, 1)
+roughness = 0.0
+roughness_texture = ExtResource("1_mkdo6")
+uv1_scale = Vector3(3.095, 3.095, 3.095)
+uv1_offset = Vector3(-1.075, -0.275, 0)
+texture_repeat = false
