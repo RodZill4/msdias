@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bb7tgdbavrct"]
+[gd_scene load_steps=11 format=3 uid="uid://bb7tgdbavrct"]
 
 [ext_resource type="Script" path="res://scenes/restart/restart_scene.gd" id="1_i5tpu"]
 [ext_resource type="ArrayMesh" uid="uid://e05s87b7eknu" path="res://models/restart_scene.obj" id="2_sotsj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cyx1l7l20d3go" path="res://light.tscn" id="4_tbco8"]
 [ext_resource type="Script" path="res://scenes/restart/bell.gd" id="5_7xueb"]
 [ext_resource type="AudioStream" uid="uid://mk16etpor4wt" path="res://sounds/sd_0.wav" id="6_ewbyv"]
+[ext_resource type="PackedScene" uid="uid://dcm83dh57nrx0" path="res://scenes/restart/message.tscn" id="7_qxwgc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kd8ly"]
 size = Vector3(5.545, 0.1, 5.485)
@@ -68,5 +69,8 @@ shape = SubResource("SphereShape3D_xcnyu")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Bell"]
 stream = ExtResource("6_ewbyv")
+
+[node name="Message" parent="." instance=ExtResource("7_qxwgc")]
+transform = Transform3D(0.822462, 0, -0.56882, 0, 1, 0, 0.56882, 0, 0.822462, 0.243553, 0.753418, -0.867645)
 
 [connection signal="ring" from="Bell" to="." method="_on_bell_ring"]

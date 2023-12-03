@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcm83dh57nrx0"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_mdq44"]
+[ext_resource type="Script" path="res://scenes/restart/message.gd" id="2_41ufi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vltdl"]
+margin = 0.005
+size = Vector3(0.21, 0.01, 0.297)
+
+[sub_resource type="QuadMesh" id="QuadMesh_c70mi"]
+size = Vector2(0.21, 0.297)
+orientation = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wkilq"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upsjd"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_wkilq")
+
+[node name="Message" instance=ExtResource("1_mdq44")]
+script = ExtResource("2_41ufi")
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_vltdl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("QuadMesh_c70mi")
+surface_material_override/0 = SubResource("StandardMaterial3D_upsjd")
+
+[node name="SubViewport" type="SubViewport" parent="." index="2"]
+size = Vector2i(210, 297)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport" index="0"]
+custom_minimum_size = Vector2(210, 297)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="SubViewport" index="1"]
+custom_minimum_size = Vector2(200, 287)
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 205.0
+offset_bottom = 292.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "It looks like you died from ...
+
+Maybe you want to ring the bell to try again?
+"
+autowrap_mode = 3

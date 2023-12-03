@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://4ev7vligewx2"]
+[gd_scene load_steps=10 format=3 uid="uid://4ev7vligewx2"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_dw6s1"]
 [ext_resource type="Script" path="res://scenes/sauna/screw_driver.gd" id="2_0cuxt"]
@@ -46,6 +46,9 @@ _data = {
 "turn": SubResource("Animation_1q7qj")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_617bq"]
+radius = 0.1
+
 [node name="ScrewDriver" instance=ExtResource("1_dw6s1")]
 script = ExtResource("2_0cuxt")
 
@@ -66,3 +69,10 @@ transform = Transform3D(1, 0, 4.46638e-06, 0, 1, 0, -4.46638e-06, 0, 1, 2.93255e
 mesh = ExtResource("3_47rmt")
 skeleton = NodePath("../..")
 script = ExtResource("4_7ss1u")
+
+[node name="ScrewArea" type="Area3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.127808)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ScrewArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.032959)
+shape = SubResource("SphereShape3D_617bq")

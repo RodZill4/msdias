@@ -7,5 +7,8 @@ func _ready():
 func do_action(state : bool):
 	if state:
 		$AnimationPlayer.play("turn")
+		for o in $ScrewArea.get_overlapping_areas():
+			if o.has_method("screw"):
+				o.screw()
 	else:
 		$AnimationPlayer.stop()

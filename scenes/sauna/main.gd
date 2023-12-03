@@ -53,6 +53,7 @@ func die(cause : String):
 	game_scene.queue_free()
 	game_scene = new_scene
 	$XROrigin3D/XRHead/ViewEffect.visible = false
+	game_scene.died(cause)
 	game_scene.connect("restart", self.restart)
 	
 	$XROrigin3D/XRHead/Music.stream = load("res://music/I Knew a Guy.mp3")
