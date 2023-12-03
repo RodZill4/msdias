@@ -1,0 +1,180 @@
+{
+	"connections": [
+		{
+			"from": "fbm2",
+			"from_port": 0,
+			"to": "colorize",
+			"to_port": 0
+		},
+		{
+			"from": "fill_to_position",
+			"from_port": 0,
+			"to": "fbm2",
+			"to_port": 0
+		},
+		{
+			"from": "normal_map2",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 4
+		},
+		{
+			"from": "colorize",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 0
+		},
+		{
+			"from": "bricks_uneven",
+			"from_port": 0,
+			"to": "normal_map2",
+			"to_port": 0
+		},
+		{
+			"from": "bricks_uneven",
+			"from_port": 1,
+			"to": "fill_to_position",
+			"to_port": 0
+		}
+	],
+	"label": "Graph",
+	"longdesc": "",
+	"name": "1682",
+	"node_position": {
+		"x": 0,
+		"y": 0
+	},
+	"nodes": [
+		{
+			"export_last_target": "Godot/Godot 4 Standard",
+			"export_paths": {
+				"Godot/Godot 4 Standard": "D:/Dev/Godot/MSDIAS/models/walls"
+			},
+			"name": "Material",
+			"node_position": {
+				"x": 323,
+				"y": -31
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1,
+					"b": 1,
+					"g": 1,
+					"r": 1,
+					"type": "Color"
+				},
+				"ao": 1,
+				"depth_scale": 0.5,
+				"emission_energy": 1,
+				"flags_transparent": true,
+				"metallic": 0,
+				"normal": 1,
+				"roughness": 1,
+				"size": 11,
+				"sss": 1
+			},
+			"seed_int": 0,
+			"type": "material"
+		},
+		{
+			"name": "fbm2",
+			"node_position": {
+				"x": -266.399994,
+				"y": -103.300003
+			},
+			"parameters": {
+				"folds": 0,
+				"iterations": 5,
+				"noise": 1,
+				"offset": 1,
+				"persistence": 0.5,
+				"scale_x": 3,
+				"scale_y": 18
+			},
+			"seed_int": 0,
+			"type": "fbm2"
+		},
+		{
+			"name": "colorize",
+			"node_position": {
+				"x": 40.600006,
+				"y": -56.300003
+			},
+			"parameters": {
+				"gradient": {
+					"interpolation": 1,
+					"points": [
+						{
+							"a": 1,
+							"b": 0.624023,
+							"g": 0.716659,
+							"pos": 0,
+							"r": 0.832031
+						},
+						{
+							"a": 1,
+							"b": 0.460739,
+							"g": 0.567891,
+							"pos": 1,
+							"r": 0.714844
+						}
+					],
+					"type": "Gradient"
+				}
+			},
+			"seed_int": 0,
+			"type": "colorize"
+		},
+		{
+			"name": "fill_to_position",
+			"node_position": {
+				"x": -526.400024,
+				"y": 66.699997
+			},
+			"parameters": {
+				"axis": 2
+			},
+			"seed_int": 0,
+			"type": "fill_to_position2"
+		},
+		{
+			"name": "normal_map2",
+			"node_position": {
+				"x": 52.600006,
+				"y": 182.699997
+			},
+			"parameters": {
+				"buffer": 1,
+				"param2": 0,
+				"size": 11,
+				"strength": 1
+			},
+			"seed_int": 0,
+			"type": "normal_map2"
+		},
+		{
+			"name": "bricks_uneven",
+			"node_position": {
+				"x": -308,
+				"y": 175
+			},
+			"parameters": {
+				"bevel": 0.065,
+				"corner": 0.17,
+				"iterations": 5,
+				"min_size": 0.3,
+				"mortar": 0,
+				"round": 0.15,
+				"rows": 17
+			},
+			"seed_int": 4100408064,
+			"type": "bricks_uneven3_2"
+		}
+	],
+	"parameters": {
+
+	},
+	"seed_int": 0,
+	"shortdesc": "",
+	"type": "graph"
+}

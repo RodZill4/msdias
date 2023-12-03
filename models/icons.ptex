@@ -1,0 +1,249 @@
+{
+	"connections": [
+		{
+			"from": "fbm2",
+			"from_port": 0,
+			"to": "remap",
+			"to_port": 0
+		},
+		{
+			"from": "remap",
+			"from_port": 0,
+			"to": "shape",
+			"to_port": 0
+		},
+		{
+			"from": "shape_2",
+			"from_port": 0,
+			"to": "math",
+			"to_port": 0
+		},
+		{
+			"from": "shape_3",
+			"from_port": 0,
+			"to": "rotate",
+			"to_port": 0
+		},
+		{
+			"from": "rotate",
+			"from_port": 0,
+			"to": "math",
+			"to_port": 1
+		},
+		{
+			"from": "shape_4",
+			"from_port": 0,
+			"to": "tones_range",
+			"to_port": 0
+		},
+		{
+			"from": "math",
+			"from_port": 0,
+			"to": "math_2",
+			"to_port": 0
+		},
+		{
+			"from": "tones_range",
+			"from_port": 0,
+			"to": "math_2",
+			"to_port": 1
+		}
+	],
+	"label": "Graph",
+	"longdesc": "",
+	"name": "@@3068",
+	"node_position": {
+		"x": 0,
+		"y": 0
+	},
+	"nodes": [
+		{
+			"export_paths": {
+
+			},
+			"name": "Material",
+			"node_position": {
+				"x": 361,
+				"y": -4
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1,
+					"b": 1,
+					"g": 1,
+					"r": 1,
+					"type": "Color"
+				},
+				"ao": 1,
+				"depth_scale": 0.5,
+				"emission_energy": 1,
+				"flags_transparent": true,
+				"metallic": 0,
+				"normal": 1,
+				"roughness": 1,
+				"size": 11,
+				"sss": 1
+			},
+			"seed_int": 0,
+			"type": "material"
+		},
+		{
+			"name": "fbm2",
+			"node_position": {
+				"x": -376,
+				"y": -51
+			},
+			"parameters": {
+				"folds": 0,
+				"iterations": 5,
+				"noise": 0,
+				"offset": 0,
+				"persistence": 0.5,
+				"scale_x": 8,
+				"scale_y": 8
+			},
+			"seed_int": 0,
+			"type": "fbm2"
+		},
+		{
+			"name": "shape",
+			"node_position": {
+				"x": 151,
+				"y": 10
+			},
+			"parameters": {
+				"edge": 0.85,
+				"radius": 1.33,
+				"shape": 0,
+				"sides": 6
+			},
+			"seed_int": 0,
+			"type": "shape"
+		},
+		{
+			"name": "remap",
+			"node_position": {
+				"x": -122,
+				"y": 37
+			},
+			"parameters": {
+				"max": 0.8,
+				"min": 0.4,
+				"step": 0
+			},
+			"seed_int": 0,
+			"type": "remap"
+		},
+		{
+			"name": "shape_2",
+			"node_position": {
+				"x": -263.217407,
+				"y": 177
+			},
+			"parameters": {
+				"edge": 0.72,
+				"radius": 0.07,
+				"shape": 2,
+				"sides": 4
+			},
+			"seed_int": 0,
+			"type": "shape"
+		},
+		{
+			"name": "shape_3",
+			"node_position": {
+				"x": -382.717407,
+				"y": 325
+			},
+			"parameters": {
+				"edge": 0.26,
+				"radius": 0.25,
+				"shape": 1,
+				"sides": 4
+			},
+			"seed_int": 0,
+			"type": "shape"
+		},
+		{
+			"name": "math",
+			"node_position": {
+				"x": -43.217407,
+				"y": 228
+			},
+			"parameters": {
+				"clamp": false,
+				"default_in1": 0,
+				"default_in2": 0,
+				"op": 2
+			},
+			"seed_int": 0,
+			"type": "math"
+		},
+		{
+			"generic_size": 1,
+			"name": "rotate",
+			"node_position": {
+				"x": -194.217407,
+				"y": 376
+			},
+			"parameters": {
+				"cx": 0,
+				"cy": 0,
+				"rotate": 45
+			},
+			"seed_int": 0,
+			"type": "rotate"
+		},
+		{
+			"name": "shape_4",
+			"node_position": {
+				"x": -116.717407,
+				"y": 501
+			},
+			"parameters": {
+				"edge": 0.67,
+				"radius": 1.16,
+				"shape": 0,
+				"sides": 4
+			},
+			"seed_int": 0,
+			"type": "shape"
+		},
+		{
+			"name": "tones_range",
+			"node_position": {
+				"x": 67.782593,
+				"y": 444
+			},
+			"parameters": {
+				"contrast": 0,
+				"invert": false,
+				"value": 0.5,
+				"width": 0.25
+			},
+			"seed_int": 0,
+			"type": "tones_range"
+		},
+		{
+			"name": "math_2",
+			"node_position": {
+				"x": 336.782593,
+				"y": 314
+			},
+			"parameters": {
+				"clamp": false,
+				"default_in1": 0,
+				"default_in2": 0,
+				"op": 14
+			},
+			"seed_int": 0,
+			"type": "math"
+		}
+	],
+	"parameters": {
+
+	},
+	"seed_int": 0,
+	"shortdesc": "",
+	"type": "graph"
+}

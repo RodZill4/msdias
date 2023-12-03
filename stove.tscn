@@ -1,0 +1,213 @@
+[gd_scene load_steps=23 format=3 uid="uid://c5ep1hnxt2pjq"]
+
+[ext_resource type="Script" path="res://stove.gd" id="1_78t2b"]
+[ext_resource type="ArrayMesh" uid="uid://bxllw2ga7q7fr" path="res://models/stove.obj" id="1_qaqfm"]
+[ext_resource type="Material" uid="uid://brmkofkf64u5r" path="res://models/walls.tres" id="2_nd1b6"]
+[ext_resource type="Material" uid="uid://chiihxip4rdrw" path="res://models/wood.tres" id="4_0726d"]
+[ext_resource type="Texture2D" uid="uid://dsh13vdmh2jsk" path="res://models/particle.png" id="4_po6ov"]
+
+[sub_resource type="Shader" id="Shader_nwyep"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+uniform vec4 hot_color : source_color;
+uniform float temperature;
+varying vec3 emission;
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+	emission = mix(vec3(0.0), hot_color.rgb, temperature*((sin(TIME*7.0)+sin(TIME*5.0))*0.25+0.5));
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+	EMISSION = emission;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8fvge"]
+resource_name = "Material.002"
+render_priority = 0
+shader = SubResource("Shader_nwyep")
+shader_parameter/albedo = Color(0.183827, 0.183827, 0.183827, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.5
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/hot_color = Color(0.160784, 0.0784314, 0, 1)
+shader_parameter/temperature = 1.0
+
+[sub_resource type="Shader" id="Shader_qi6g4"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx,unshaded;
+uniform vec4 base_color : source_color;
+uniform vec4 hot_color : source_color;
+uniform float temperature;
+
+varying vec3 color;
+
+void vertex() {
+	color = mix(base_color.rgb, hot_color.rgb, temperature*((sin(TIME*7.0)+sin(TIME*5.0))*0.25+0.5));
+}
+
+void fragment() {
+	ALBEDO = color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbicd"]
+render_priority = 0
+shader = SubResource("Shader_qi6g4")
+shader_parameter/base_color = Color(0.0666667, 0.0627451, 0.0666667, 1)
+shader_parameter/hot_color = Color(0.933333, 0.2, 0, 1)
+shader_parameter/temperature = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dgo8t"]
+height = 0.467657
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i051q"]
+size = Vector3(0.8, 0.722, 1.38)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iki2n"]
+size = Vector3(0.8, 0.202, 1.38)
+
+[sub_resource type="CurveTexture" id="CurveTexture_2mq4k"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ftehx"]
+lifetime_randomness = 0.45
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 70.522
+initial_velocity_min = 0.5
+initial_velocity_max = 2.0
+angular_velocity_max = 64.48
+gravity = Vector3(0, 1.83, 0)
+scale_curve = SubResource("CurveTexture_2mq4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_id4my"]
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_po6ov")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_p3vva"]
+material = SubResource("StandardMaterial3D_id4my")
+
+[sub_resource type="Gradient" id="Gradient_y7nld"]
+colors = PackedColorArray(0.956863, 0.27451, 0, 1, 1, 1, 0.501961, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mpne2"]
+gradient = SubResource("Gradient_y7nld")
+
+[sub_resource type="Curve" id="Curve_xa1p5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.49673, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sfxev"]
+texture_mode = 1
+curve = SubResource("Curve_xa1p5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cou82"]
+lifetime_randomness = 0.57
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 34.253
+initial_velocity_min = 0.5
+initial_velocity_max = 2.0
+angular_velocity_min = 691.84
+angular_velocity_max = 691.84
+gravity = Vector3(0, 1.83, 0)
+scale_curve = SubResource("CurveTexture_sfxev")
+color_ramp = SubResource("GradientTexture1D_mpne2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2anr2"]
+material = SubResource("StandardMaterial3D_id4my")
+
+[node name="Stove" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.06863)
+script = ExtResource("1_78t2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.0125127, 0)
+mesh = ExtResource("1_qaqfm")
+surface_material_override/1 = ExtResource("2_nd1b6")
+surface_material_override/2 = ExtResource("4_0726d")
+surface_material_override/3 = SubResource("ShaderMaterial_8fvge")
+surface_material_override/4 = SubResource("ShaderMaterial_pbicd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740448, 0)
+shape = SubResource("CylinderShape3D_dgo8t")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0.341209, 0)
+shape = SubResource("BoxShape3D_i051q")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0.341209, 0)
+shape = SubResource("BoxShape3D_i051q")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, -1, 0, 0.618187, 0)
+shape = SubResource("BoxShape3D_iki2n")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, -1, 0, 0.0566025, 0)
+shape = SubResource("BoxShape3D_iki2n")
+
+[node name="Steam" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18342, 0)
+emitting = false
+amount = 64
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.17
+randomness = 1.0
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_ftehx")
+draw_pass_1 = SubResource("QuadMesh_p3vva")
+
+[node name="Fire" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18342, 0)
+emitting = false
+amount = 32
+lifetime = 1.03
+explosiveness = 0.17
+randomness = 1.0
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_cou82")
+draw_pass_1 = SubResource("QuadMesh_2anr2")

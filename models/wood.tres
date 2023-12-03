@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://chiihxip4rdrw"]
+
+[ext_resource type="Texture2D" uid="uid://ds1d5f4g7abj3" path="res://models/wood_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cff5v4ndb4j1m" path="res://models/wood_normal.png" id="3"]
+
+[resource]
+albedo_color = Color(0.720467, 0.720468, 0.720467, 1)
+albedo_texture = ExtResource("1")
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("3")

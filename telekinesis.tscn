@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwefgiaunwbnn"]
+
+[ext_resource type="Script" path="res://telekinesis.gd" id="1_6glkh"]
+[ext_resource type="Texture2D" uid="uid://c03u5ip0dakui" path="res://models/cross.png" id="2_ghu0q"]
+[ext_resource type="Script" path="res://telekinesis_pickup_point.gd" id="3_krlhl"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_0cssx"]
+resource_local_to_scene = true
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyxhn"]
+resource_local_to_scene = true
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.486275, 0.490196, 0.490196, 1)
+albedo_texture = ExtResource("2_ghu0q")
+
+[node name="Telekinesis" type="Node3D"]
+script = ExtResource("1_6glkh")
+
+[node name="RayCast" type="RayCast3D" parent="."]
+target_position = Vector3(10, 0, 0)
+collision_mask = 16777215
+
+[node name="Target" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.179032, 0, 0)
+visible = false
+layers = 3
+mesh = SubResource("QuadMesh_0cssx")
+surface_material_override/0 = SubResource("StandardMaterial3D_kyxhn")
+
+[node name="PickupPoint" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.179032, 0, 0)
+script = ExtResource("3_krlhl")
