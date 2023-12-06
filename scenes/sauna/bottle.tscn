@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://rjm4fpxp6tny"]
+[gd_scene load_steps=7 format=3 uid="uid://rjm4fpxp6tny"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_yw374"]
 [ext_resource type="Script" path="res://scenes/sauna/bottle.gd" id="2_jgtp8"]
 [ext_resource type="ArrayMesh" uid="uid://br7vngvi51iky" path="res://models/bottle.obj" id="3_1fv72"]
-[ext_resource type="Texture2D" uid="uid://dsh13vdmh2jsk" path="res://models/particle.png" id="4_jc8hj"]
+[ext_resource type="PackedScene" uid="uid://dt2de1st5llt0" path="res://scenes/common/trickle.tscn" id="4_nkmua"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3ygky"]
 height = 0.295962
@@ -11,28 +11,6 @@ radius = 0.0525908
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ogcgf"]
 radius = 0.0401625
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g42t5"]
-angle_min = -10.7
-angle_max = 279.4
-direction = Vector3(0, -1, 0)
-spread = 50.0
-initial_velocity_max = 0.05
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iaumq"]
-blend_mode = 1
-shading_mode = 0
-albedo_color = Color(0.392157, 0.392157, 0.392157, 1)
-albedo_texture = ExtResource("4_jc8hj")
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_h1cwa"]
-material = SubResource("StandardMaterial3D_iaumq")
-size = Vector2(0.03, 0.03)
-orientation = 2
 
 [node name="Bottle" instance=ExtResource("1_yw374")]
 script = ExtResource("2_jgtp8")
@@ -51,17 +29,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.167358, 0)
 [node name="CollisionShape" type="CollisionShape3D" parent="DrinkArea" index="0"]
 shape = SubResource("SphereShape3D_ogcgf")
 
-[node name="Particles" type="GPUParticles3D" parent="." index="3"]
-transform = Transform3D(1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0, 0.161, 0)
-emitting = false
-amount = 256
-lifetime = 0.31
-randomness = 0.8
-process_material = SubResource("ParticleProcessMaterial_g42t5")
-draw_pass_1 = SubResource("PlaneMesh_h1cwa")
-
-[node name="RayCast3D" type="RayCast3D" parent="." index="4"]
-transform = Transform3D(1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0, 0.161, 0)
-visible = false
-target_position = Vector3(0, -2, 0)
-collision_mask = 4294967295
+[node name="Trickle" parent="." index="3" instance=ExtResource("4_nkmua")]
+transform = Transform3D(1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0, 0.178494, 1.16415e-10)
+liquid_type = "vodka"

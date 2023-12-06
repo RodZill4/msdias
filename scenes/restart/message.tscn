@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/restart/message.gd" id="2_41ufi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vltdl"]
-margin = 0.005
+margin = 0.001
 size = Vector3(0.21, 0.01, 0.297)
 
 [sub_resource type="QuadMesh" id="QuadMesh_c70mi"]
@@ -19,6 +19,7 @@ resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_wkilq")
 
 [node name="Message" instance=ExtResource("1_mdq44")]
+mass = 0.2
 script = ExtResource("2_41ufi")
 
 [node name="CollisionShape3D" parent="." index="0"]

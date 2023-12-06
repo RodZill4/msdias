@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt2de1st5llt0"]
+
+[ext_resource type="Texture2D" uid="uid://dsh13vdmh2jsk" path="res://models/particle.png" id="1_6q68t"]
+[ext_resource type="Script" path="res://scenes/common/trickle.gd" id="1_op4bf"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g42t5"]
+angle_min = -10.7
+angle_max = 279.4
+direction = Vector3(0, -1, 0)
+spread = 50.0
+initial_velocity_max = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iaumq"]
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.392157, 0.392157, 0.392157, 1)
+albedo_texture = ExtResource("1_6q68t")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h1cwa"]
+material = SubResource("StandardMaterial3D_iaumq")
+size = Vector2(0.03, 0.03)
+orientation = 2
+
+[node name="Trickle" type="Node3D"]
+script = ExtResource("1_op4bf")
+force_vertical = true
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+amount = 256
+amount_ratio = 0.0
+lifetime = 0.31
+randomness = 0.8
+process_material = SubResource("ParticleProcessMaterial_g42t5")
+draw_pass_1 = SubResource("PlaneMesh_h1cwa")
+
+[node name="RayCast" type="RayCast3D" parent="."]
+collision_mask = 4294967295

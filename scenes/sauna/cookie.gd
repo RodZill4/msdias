@@ -18,7 +18,7 @@ func on_liquid(type : String, quantity : float):
 			$AnimationPlayer.play("soak")
 		"vodka":
 			$PoisonGas.emitting = true
-			get_node("/root/Main").die("poison gas")
+			get_node("/root/Main").current_scene.die("poison gas")
 
 func eat():
 	return "poisoned cookie"

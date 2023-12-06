@@ -5,7 +5,7 @@ extends Node3D
 
 
 ## Controller
-@onready var _controller := XRHelpers.get_xr_controller(self)
+@onready var _controller : XRController3D = XRHelpers.get_xr_controller(self)
 
 var target_object = null
 
@@ -48,11 +48,16 @@ func _process(delta):
 		var distance : float = ($RayCast.get_collision_point()-global_position).length()
 		$Target.position.x = distance-0.03
 		$Target.visible = true
-		target_object = $RayCast.get_collider()
-		var interactable : bool = false
-		if target_object != null and (target_object.has_method("action") or target_object.has_method("pick_up")):
-			interactable = true
-		$Target.get_surface_override_material(0).albedo_color = Color(1.0, 1.0, 1.0) if interactable else Color(0.2, 0.2, 0.2)
+		var new_target_object = $RayCast.get_collider()
+		var crosshair_color : Color = Color(0.2, 0.2, 0.2)
+		if new_target_object != null and (new_target_object.has_method("action") or new_target_object.has_method("pick_up")):
+			if target_object != new_target_object:
+				_controller.trigger_haptic_pulse("haptic", 3, 0.5, 0.1, 0)
+				target_object = new_target_object
+			crosshair_color = Color(1.0, 1.0, 1.0)
+		else:
+			target_object = null
+		$Target.get_surface_override_material(0).albedo_color = crosshair_color
 	else:
 		$Target.visible = false
 		target_object = null

@@ -24,4 +24,4 @@ func on_liquid(type : String, quantity : float):
 
 func explode():
 	$Fire.emitting = true
-	get_node("/root/Main").die("vodka fire")
+	get_node("/root/Main").current_scene.die("vodka fire")

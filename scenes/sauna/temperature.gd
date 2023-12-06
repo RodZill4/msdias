@@ -30,8 +30,8 @@ func _process(delta):
 		temperature = 30
 		if increase < 0:
 			set_process(false)
-			get_node("/root/Main").die("")
+			get_node("/root/Main").current_scene.die("")
 	elif temperature > 140.0:
 		set_process(false)
-		get_node("/root/Main").die("excessive heat")
+		get_node("/root/Main").current_scene.die("excessive heat")
 	$Pivot.rotation_degrees.x = angle_from_temperature(temperature)

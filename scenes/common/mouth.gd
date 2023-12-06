@@ -10,4 +10,4 @@ func _on_body_entered(body):
 		$AudioStreamPlayer3D.stream = load("res://sounds/crunch.1.ogg")
 		$AudioStreamPlayer3D.play()
 		if food == "poisoned cookie":
-			get_node("/root/Main").die("poisoned cookie")
+			get_node("/root/Main").current_scene.die("poisoned cookie")

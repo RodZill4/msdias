@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dojfb14jk0aak"]
+[gd_scene load_steps=13 format=3 uid="uid://dojfb14jk0aak"]
 
 [ext_resource type="Script" path="res://scenes/sauna/main.gd" id="1_ren5m"]
 [ext_resource type="Script" path="res://scenes/common/mouth.gd" id="2_1or30"]
@@ -6,14 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="3_exi65"]
 [ext_resource type="AudioStream" uid="uid://bodo55kk7n0u6" path="res://sounds/crunch.1.ogg" id="3_srebc"]
 [ext_resource type="PackedScene" uid="uid://dwefgiaunwbnn" path="res://scenes/common/telekinesis.tscn" id="5_sw2kw"]
-
-[sub_resource type="Gradient" id="Gradient_6wt6e"]
-offsets = PackedFloat32Array(0, 0.699275, 1)
-colors = PackedColorArray(0.72549, 0, 0, 0, 0.679015, 2.86378e-06, 2.88785e-07, 1, 0, 0, 0, 1)
-
-[sub_resource type="Gradient" id="Gradient_5bqmc"]
-offsets = PackedFloat32Array(0, 0.699275, 1)
-colors = PackedColorArray(4.81308e-08, 0.458538, 0.248484, 0, 0, 0.428763, 0.218099, 1, 0, 0, 0, 1)
 
 [sub_resource type="Environment" id="Environment_5d88d"]
 background_mode = 2
@@ -45,8 +37,6 @@ roughness = 0.5
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ren5m")
-effect_gradient_fire_death = SubResource("Gradient_6wt6e")
-effect_gradient_poison_death = SubResource("Gradient_5bqmc")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5d88d")

@@ -1,11 +1,8 @@
 extends Node3D
 
-@export var effect_gradient_fire_death : Gradient
-@export var effect_gradient_poison_death : Gradient
 
 var xr_interface: XRInterface
-
-var game_scene
+var current_scene : Node = null
 
 
 signal effect_finished()
@@ -26,47 +23,19 @@ func _ready():
 	
 	set_process(false)
 	
-	game_scene = load("res://scenes/sauna/sauna_scene.tscn").instantiate()
-	add_child(game_scene)
-	
-	$XROrigin3D/XRHead/Music.stream = load("res://music/Spy Glass.mp3")
-	$XROrigin3D/XRHead/Music.play()
+	load_scene("res://scenes/restart/restart_scene.tscn", "title")
 
-@onready var died : bool = false
-
-func die(cause : String):
-	if died:
-		return
-	died = true
-	print("Died from "+cause)
-	match cause:
-		"vodka fire", "excessive heat":
-			start_view_effect(effect_gradient_fire_death, 5)
-			await self.effect_finished
-		"poison gas", "poisoned cookie":
-			start_view_effect(effect_gradient_poison_death, 5)
-			await self.effect_finished
-		_:
-			print("Unknown death "+cause)
-	var new_scene = load("res://scenes/restart/restart_scene.tscn").instantiate()
+func load_scene(scene_path : String, start_arg = null):
+	var new_scene = load(scene_path).instantiate()
 	add_child(new_scene)
-	game_scene.queue_free()
-	game_scene = new_scene
+	if current_scene:
+		current_scene.queue_free()
+	current_scene = new_scene
 	$XROrigin3D/XRHead/ViewEffect.visible = false
-	game_scene.died(cause)
-	game_scene.connect("restart", self.restart)
-	
-	$XROrigin3D/XRHead/Music.stream = load("res://music/I Knew a Guy.mp3")
-	$XROrigin3D/XRHead/Music.play()
+	current_scene.start(start_arg)
 
-func restart():
-	var new_scene = load("res://scenes/sauna/sauna_scene.tscn").instantiate()
-	add_child(new_scene)
-	game_scene.queue_free()
-	game_scene = new_scene
-	died = false
-	
-	$XROrigin3D/XRHead/Music.stream = load("res://music/Spy Glass.mp3")
+func play_music(file_path : String):
+	$XROrigin3D/XRHead/Music.stream = load(file_path)
 	$XROrigin3D/XRHead/Music.play()
 
 var current_effect_gradient : Gradient
@@ -89,7 +58,6 @@ func start_view_effect(g : Gradient, d : float = 1.0):
 
 func _process(delta):
 	current_effect_progress += delta
-	print(current_effect_progress)
 	$XROrigin3D/XRHead/ViewEffect.get_surface_override_material(0).albedo_color = current_effect_gradient.sample(current_effect_progress/current_effect_duration)
 	if current_effect_progress > current_effect_duration:
 		set_process(false)
