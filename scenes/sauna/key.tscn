@@ -6,7 +6,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jro25"]
 margin = 0.001
-size = Vector3(0.08, 0.01, 0.04)
+size = Vector3(0.055, 0.02, 0.08)
 
 [node name="Key" instance=ExtResource("1_80t3m")]
 script = ExtResource("2_w1ulw")

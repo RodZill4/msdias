@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6rlrrlkumljy"]
+[gd_scene load_steps=13 format=3 uid="uid://c6rlrrlkumljy"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_oxgo5"]
 [ext_resource type="Script" path="res://scenes/sauna/bucket.gd" id="2_8pc1b"]
 [ext_resource type="ArrayMesh" uid="uid://71duu38cl1dk" path="res://models/bucket.obj" id="3_2827u"]
 [ext_resource type="Texture2D" uid="uid://ds1d5f4g7abj3" path="res://models/wood_albedo.png" id="4_5fofj"]
+[ext_resource type="Material" uid="uid://chiihxip4rdrw" path="res://models/wood.tres" id="4_jlahn"]
 [ext_resource type="Texture2D" uid="uid://cff5v4ndb4j1m" path="res://models/wood_normal.png" id="5_p2ral"]
 [ext_resource type="PackedScene" uid="uid://dt2de1st5llt0" path="res://scenes/common/trickle.tscn" id="6_akfbu"]
 
@@ -18,22 +19,76 @@ size = Vector3(0.0858154, 0.321899, 0.0329132)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mtf84"]
 size = Vector3(0.0858154, 0.403137, 0.0329132)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avjuq"]
-albedo_color = Color(0.94902, 0.94902, 0.94902, 1)
-albedo_texture = ExtResource("4_5fofj")
-roughness = 0.5
-normal_enabled = true
-normal_texture = ExtResource("5_p2ral")
+[sub_resource type="Shader" id="Shader_7gad8"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.stable's StandardMaterial3D.
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_kkbty"]
-top_radius = 0.14
-bottom_radius = 0.14
-height = 0.001
-radial_segments = 12
-rings = 1
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform sampler2D texture_normal : hint_roughness_normal,filter_linear_mipmap,repeat_enable;
+uniform float normal_scale : hint_range(-16,16);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+uniform float liquid_level;
+
+varying float height;
+varying float liquid_height;
+
+void vertex() {
+	liquid_height = (MODEL_MATRIX*vec4(0.0, liquid_level, 0.0, 0.0)).y;
+	height = (MODEL_MATRIX*vec4(VERTEX, 0.0)).y;
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+	NORMAL_MAP = texture(texture_normal,base_uv).rgb;
+	NORMAL_MAP_DEPTH = normal_scale;
+	if (height < liquid_height) {
+		ALBEDO = vec3(1.0);
+		NORMAL = vec3(0.0, 1.0, 0.0);
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cihts"]
+render_priority = 0
+shader = SubResource("Shader_7gad8")
+shader_parameter/albedo = Color(0.720467, 0.720468, 0.720467, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.5
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/liquid_level = 0.08
+shader_parameter/texture_albedo = ExtResource("4_5fofj")
+shader_parameter/texture_normal = ExtResource("5_p2ral")
 
 [node name="Bucket" instance=ExtResource("1_oxgo5")]
-transform = Transform3D(0.94508, 0.326839, 0, -0.326839, 0.94508, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_8pc1b")
 
 [node name="CollisionShape3D" parent="." index="0"]
@@ -91,12 +146,9 @@ shape = SubResource("BoxShape3D_tbr4f")
 [node name="Mesh" type="MeshInstance3D" parent="." index="13"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.163235, 0)
 mesh = ExtResource("3_2827u")
-surface_material_override/0 = SubResource("StandardMaterial3D_avjuq")
+surface_material_override/0 = ExtResource("4_jlahn")
+surface_material_override/1 = SubResource("ShaderMaterial_cihts")
 
-[node name="LiquidLevel" type="MeshInstance3D" parent="." index="14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00389265, 0)
-mesh = SubResource("CylinderMesh_kkbty")
-
-[node name="Trickle" parent="." index="15" instance=ExtResource("6_akfbu")]
+[node name="Trickle" parent="." index="14" instance=ExtResource("6_akfbu")]
 transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0.181839, 3.72529e-09)
 radius = 0.16

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://4ev7vligewx2"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_dw6s1"]
-[ext_resource type="Script" path="res://scenes/sauna/screw_driver.gd" id="2_0cuxt"]
+[ext_resource type="Script" path="res://scenes/sauna/screwdriver.gd" id="2_0cuxt"]
+[ext_resource type="Script" path="res://scenes/sauna/screwdriver_mesh.gd" id="3_2w4s8"]
 [ext_resource type="ArrayMesh" uid="uid://coo16t6w2daxh" path="res://models/screwdriver.obj" id="3_47rmt"]
-[ext_resource type="Script" path="res://scenes/common/pickable_mesh.gd" id="4_7ss1u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtqgr"]
 radius = 0.0190862
@@ -14,7 +14,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/Mesh:rotation")
+tracks/0/path = NodePath("Mesh/Mesh:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,7 +30,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/Mesh:rotation")
+tracks/0/path = NodePath("Mesh/Mesh:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -56,23 +56,27 @@ script = ExtResource("2_0cuxt")
 transform = Transform3D(0.926048, -0.0160715, 0.377063, 0.377116, 0.000273449, -0.926166, 0.0147817, 0.999871, 0.00631404, -2.93255e-05, 0.0017238, 0.00172305)
 shape = SubResource("CapsuleShape3D_gtqgr")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+[node name="Mesh" type="Node3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("3_2w4s8")
+
+[node name="Mesh" type="MeshInstance3D" parent="Mesh" index="0"]
+transform = Transform3D(1, 0, 4.46638e-06, 0, 1, 0, -4.46638e-06, 0, 1, 2.93255e-05, 0.00172278, -0.00172305)
+mesh = ExtResource("3_47rmt")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mesh" index="1"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_mgaxq")
 }
 
-[node name="Pivot" type="Node3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Pivot" index="0"]
-transform = Transform3D(1, 0, 4.46638e-06, 0, 1, 0, -4.46638e-06, 0, 1, 2.93255e-05, 0.00172278, -0.00172305)
-mesh = ExtResource("3_47rmt")
-skeleton = NodePath("../..")
-script = ExtResource("4_7ss1u")
-
-[node name="ScrewArea" type="Area3D" parent="." index="3"]
+[node name="ScrewArea" type="Area3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.127808)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ScrewArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.032959)
 shape = SubResource("SphereShape3D_617bq")
+
+[connection signal="area_entered" from="ScrewArea" to="." method="_on_screw_area_area_entered"]
+[connection signal="area_exited" from="ScrewArea" to="." method="_on_screw_area_area_exited"]

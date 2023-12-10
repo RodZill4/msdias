@@ -17,6 +17,9 @@ func angle_from_temperature(t : float) -> float:
 func screw():
 	increase = -5.0
 
+func get_interaction_anchor(action : String):
+	return $ScrewdriverAnchor
+
 func on_vapor():
 	temperature -= 5
 	if temperature < 30:

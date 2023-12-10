@@ -24,10 +24,9 @@ func eat():
 	return "poisoned cookie"
 
 func completely_soaked():
-	print("Hello")
 	if cookey:
 		var key = load("res://scenes/sauna/key.tscn").instantiate()
 		key.position = position
 		add_collision_exception_with(key)
 		get_parent().add_child(key)
-	queue_free()
+	drop_and_free()

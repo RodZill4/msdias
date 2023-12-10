@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfh2bxas4onmk"]
+
+[ext_resource type="Script" path="res://scenes/sauna/seven_segments.gd" id="1_k7vhq"]
+[ext_resource type="ArrayMesh" uid="uid://cemvsfal47wau" path="res://models/segment.obj" id="1_ta4yb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbnnt"]
+shading_mode = 0
+albedo_color = Color(0.843137, 0.00392157, 0, 1)
+
+[node name="SevenSegments" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 8.88178e-16, -1, -0.965926, 0.258819, 4.2222e-08, 0.258819, 0.965926, -1.13133e-08, 0.00322957, -0.00625947, 0.051788)
+script = ExtResource("1_k7vhq")
+
+[node name="SegmentA" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 1.77636e-15, 1, 0, 1, 8.88178e-16, -4.37114e-08, -0.0282523, 0.0385352, 0.0111356)
+material_override = SubResource("StandardMaterial3D_mbnnt")
+mesh = ExtResource("1_ta4yb")
+skeleton = NodePath("../../Circuit")
+
+[node name="SegmentB" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 0, -6.66134e-16, 0, 1, -0.0168013, 0.0385351, 0)
+material_override = SubResource("StandardMaterial3D_mbnnt")
+mesh = ExtResource("1_ta4yb")
+skeleton = NodePath("../../Circuit")
+
+[node name="SegmentC" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 0, -6.66134e-16, 0, 1, 0.00693756, 0.0385352, -3.55271e-15)
+material_override = SubResource("StandardMaterial3D_mbnnt")
+mesh = ExtResource("1_ta4yb")
+skeleton = NodePath("../../Circuit")
+
+[node name="SegmentD" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 1.77636e-15, 1, 0, 1, 8.88178e-16, -4.37114e-08, 0.0188251, 0.0385352, 0.0111356)
+material_override = SubResource("StandardMaterial3D_mbnnt")
+mesh = ExtResource("1_ta4yb")
+skeleton = NodePath("../../Circuit")
+
+[node name="SegmentE" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 4.44089e-15, 0, 1, 0, 1.11022e-15, 8.88178e-16, 1, 0.00693756, 0.0385352, 0.0221702)
+material_override = SubResource("StandardMaterial3D_mbnnt")
+mesh = ExtResource("1_ta4yb")
+skeleton = NodePath("../../Circuit")
+
+[node name="SegmentF" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 0, -6.66134e-16, 0, 1, -0.0168013, 0.038535, 0.0221702)
+material_override = SubResource("StandardMaterial3D_mbnnt")
+mesh = ExtResource("1_ta4yb")
+skeleton = NodePath("../../Circuit")
+
+[node name="SegmentG" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0045011, 0.0385352, 0.0111356)
+visible = false
+material_override = SubResource("StandardMaterial3D_mbnnt")
+mesh = ExtResource("1_ta4yb")
+skeleton = NodePath("../../Circuit")

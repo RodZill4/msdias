@@ -3,3 +3,5 @@
 addons/
 android/
 export/
+*.tmp
+*.blend1

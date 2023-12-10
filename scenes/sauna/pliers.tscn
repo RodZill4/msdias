@@ -1,0 +1,97 @@
+[gd_scene load_steps=9 format=3 uid="uid://60hpvwrkcwd1"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_v6pgy"]
+[ext_resource type="ArrayMesh" uid="uid://dkkf1sduwc21a" path="res://models/pliers.obj" id="2_a2eaw"]
+[ext_resource type="Script" path="res://scenes/sauna/pliers.gd" id="2_if0t7"]
+[ext_resource type="Script" path="res://scenes/sauna/pliers_mesh.gd" id="3_bajxb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wuhf6"]
+margin = 0.001
+size = Vector3(0.15, 0.02, 0.12)
+
+[sub_resource type="Animation" id="Animation_swm1l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.349066, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.79253, 3.14159)]
+}
+
+[sub_resource type="Animation" id="Animation_lubgo"]
+resource_name = "cut"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.349066, 0), Vector3(0, 0, 0), Vector3(0, 0.349066, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.79253, 3.14159), Vector3(0, 3.14159, 3.14159), Vector3(0, 2.79253, 3.14159)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7rq4"]
+_data = {
+"RESET": SubResource("Animation_swm1l"),
+"cut": SubResource("Animation_lubgo")
+}
+
+[node name="PickableObject" instance=ExtResource("1_v6pgy")]
+script = ExtResource("2_if0t7")
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00923114, 0, 0)
+shape = SubResource("BoxShape3D_wuhf6")
+
+[node name="Mesh" type="Node3D" parent="." index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.0394876)
+script = ExtResource("3_bajxb")
+
+[node name="Mesh1" type="MeshInstance3D" parent="Mesh" index="0"]
+transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 0, 0, 0)
+mesh = ExtResource("2_a2eaw")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Mesh" index="1"]
+transform = Transform3D(0.939694, 2.38229e-06, 0.342017, 2.53518e-06, -1, 0, 0.342017, 8.67075e-07, -0.939694, 0, 0, 0)
+mesh = ExtResource("2_a2eaw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mesh" index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_u7rq4")
+}
+
+[node name="CutArea" type="Area3D" parent="." index="2"]

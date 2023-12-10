@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://c63q1llxbb4op"]
+
+[ext_resource type="Script" path="res://scenes/sauna/bomb.gd" id="1_c7sg3"]
+[ext_resource type="ArrayMesh" uid="uid://8du5xve8p6ru" path="res://models/bomb.obj" id="1_tqyqa"]
+[ext_resource type="PackedScene" uid="uid://dfh2bxas4onmk" path="res://scenes/sauna/seven_segments.tscn" id="2_obcgt"]
+[ext_resource type="PackedScene" uid="uid://08cobamsesx0" path="res://scenes/sauna/wire.tscn" id="4_ttjas"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_64ap6"]
+radius = 0.01
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nh08n"]
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3pfdi"]
+albedo_color = Color(0.886275, 0, 0.141176, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ct8tv"]
+material = SubResource("StandardMaterial3D_3pfdi")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.4
+
+[node name="Bomb" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.316212, -1.53528)
+script = ExtResource("1_c7sg3")
+
+[node name="Circuit" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.03749e-08, -2.42529e-08, -0.775, -0.748592, 0.200585, 3.2722e-08, 0.200585, 0.748592, -3.38763e-08, 0, 0, 0.0501107)
+mesh = ExtResource("1_tqyqa")
+
+[node name="SevenSegments1" parent="." instance=ExtResource("2_obcgt")]
+transform = Transform3D(-4.37114e-08, 8.88178e-16, -1, -0.965926, 0.258819, 4.2222e-08, 0.258819, 0.965926, -1.13133e-08, -0.112362, -0.00625947, 0.051788)
+
+[node name="SevenSegments2" parent="." instance=ExtResource("2_obcgt")]
+transform = Transform3D(-4.37114e-08, 8.88178e-16, -1, -0.965926, 0.258819, 4.2222e-08, 0.258819, 0.965926, -1.13133e-08, -0.0761493, -0.00625947, 0.051788)
+value = 2
+
+[node name="SevenSegments3" parent="." instance=ExtResource("2_obcgt")]
+transform = Transform3D(-4.37114e-08, 8.88178e-16, -1, -0.965926, 0.258819, 4.2222e-08, 0.258819, 0.965926, -1.13133e-08, -0.0255084, -0.00625947, 0.051788)
+
+[node name="SevenSegments4" parent="." instance=ExtResource("2_obcgt")]
+transform = Transform3D(-4.37114e-08, 8.88178e-16, -1, -0.965926, 0.258819, 4.2222e-08, 0.258819, 0.965926, -1.13133e-08, 0.00886733, -0.00625947, 0.051788)
+
+[node name="Light" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0355894, -0.0549547, 0.0923264)
+mesh = SubResource("SphereMesh_64ap6")
+surface_material_override/0 = SubResource("StandardMaterial3D_nh08n")
+
+[node name="Lamp" type="OmniLight3D" parent="Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00198435, 0.00280064, 0.0144775)
+visible = false
+omni_range = 0.5
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Dynamite1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.039468, 0.00169599)
+mesh = SubResource("CylinderMesh_ct8tv")
+
+[node name="Dynamite2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.91218e-09, -0.0981131, 0.018245)
+mesh = SubResource("CylinderMesh_ct8tv")
+
+[node name="Dynamite3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.85393e-09, -0.0257753, -0.0595548)
+mesh = SubResource("CylinderMesh_ct8tv")
+
+[node name="Dynamite4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05825e-09, -0.0833295, -0.0408077)
+mesh = SubResource("CylinderMesh_ct8tv")
+
+[node name="Dynamite5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05825e-09, 0.0174584, -0.0186459)
+mesh = SubResource("CylinderMesh_ct8tv")
+
+[node name="Dynamite6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.85393e-09, 0.0280218, -0.0793302)
+mesh = SubResource("CylinderMesh_ct8tv")
+
+[node name="Dynamite7" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05825e-09, 0.0712555, -0.0384213)
+mesh = SubResource("CylinderMesh_ct8tv")
+
+[node name="Wire1" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(0.863888, 0, -0.503684, 0, 1, 0, 0.503684, 0, 0.863888, -0.149518, -0.0650983, 0.0926455)
+color = Color(0.870588, 0, 0.0588235, 1)
+
+[node name="Wire2" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(0.98401, 0, -0.178116, -0.0222221, 0.992187, -0.122767, 0.176724, 0.124762, 0.976321, 0.0061269, -0.0731681, 0.0926455)
+color = Color(0.027451, 0, 0.870588, 1)
+
+[node name="Wire3" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(0.971165, -0.199488, -0.130546, 0.178511, 0.97142, -0.156448, 0.158025, 0.128633, 0.979021, 0.15032, -0.0731681, 0.0926455)
+color = Color(0.145098, 0.870588, 0, 1)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

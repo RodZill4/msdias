@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://c6q1l5fnlrdp6"]
+[gd_scene load_steps=61 format=3 uid="uid://c6q1l5fnlrdp6"]
 
 [ext_resource type="Texture2D" uid="uid://v66qp1vygenk" path="res://models/floor_albedo.png" id="1_rf5f1"]
 [ext_resource type="Script" path="res://scenes/sauna/sauna_scene.gd" id="1_upwxg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://brx1yflcwuihf" path="res://models/floor_orm.png" id="3_og6rg"]
 [ext_resource type="Material" uid="uid://brmkofkf64u5r" path="res://models/walls.tres" id="4_ca530"]
 [ext_resource type="PackedScene" uid="uid://cyx1l7l20d3go" path="res://light.tscn" id="5_j335g"]
+[ext_resource type="Material" uid="uid://dynwtts3t21ib" path="res://models/floor.tres" id="5_x3pep"]
 [ext_resource type="ArrayMesh" uid="uid://b1ahkn1i714ho" path="res://models/doors.obj" id="6_ma6cy"]
 [ext_resource type="ArrayMesh" uid="uid://dkc6nfvift6b5" path="res://models/bench2.obj" id="6_p24yt"]
 [ext_resource type="Material" uid="uid://chiihxip4rdrw" path="res://models/wood.tres" id="7_rdevi"]
@@ -15,7 +16,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bol7uo6wtc66" path="res://models/bench3.obj" id="9_etp48"]
 [ext_resource type="Texture2D" uid="uid://bqsh0j0mdh6cq" path="res://models/door_writing.png" id="9_jleff"]
 [ext_resource type="ArrayMesh" uid="uid://cwjam85vhc3fy" path="res://models/bench2_key.obj" id="9_oh2g6"]
-[ext_resource type="PackedScene" uid="uid://4ev7vligewx2" path="res://scenes/sauna/screw_driver.tscn" id="10_jhok0"]
+[ext_resource type="PackedScene" uid="uid://4ev7vligewx2" path="res://scenes/sauna/screwdriver.tscn" id="10_jhok0"]
 [ext_resource type="PackedScene" uid="uid://c6rlrrlkumljy" path="res://scenes/sauna/bucket.tscn" id="11_k1x68"]
 [ext_resource type="ArrayMesh" uid="uid://cxj7cmrceew7v" path="res://models/pipe.obj" id="12_4skkf"]
 [ext_resource type="Texture2D" uid="uid://dybplhqr3d28i" path="res://models/sauna_t.png" id="13_v14ny"]
@@ -26,6 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://c5ep1hnxt2pjq" path="res://scenes/sauna/stove.tscn" id="18_dfjaf"]
 [ext_resource type="PackedScene" uid="uid://rjm4fpxp6tny" path="res://scenes/sauna/bottle.tscn" id="19_kx2xb"]
 [ext_resource type="PackedScene" uid="uid://b0xm6b1pl5sfx" path="res://scenes/sauna/cookie.tscn" id="20_balac"]
+[ext_resource type="PackedScene" uid="uid://60hpvwrkcwd1" path="res://scenes/sauna/pliers.tscn" id="27_fgqfk"]
+[ext_resource type="PackedScene" uid="uid://c63q1llxbb4op" path="res://scenes/sauna/bomb.tscn" id="29_aun1c"]
 
 [sub_resource type="Gradient" id="Gradient_d47og"]
 colors = PackedColorArray(0.666569, 0.666569, 0.666569, 0, 0.877616, 0.877616, 0.877616, 1)
@@ -129,11 +132,11 @@ size = Vector3(0.960048, 0.523193, 0.0856445)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3c06e"]
 margin = 0.005
-size = Vector3(5, 0.5, 0.6)
+size = Vector3(5, 0.52, 0.6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2mb67"]
 margin = 0.005
-size = Vector3(1.63, 0.5, 0.6)
+size = Vector3(1.63, 0.52, 0.6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp6bf"]
 albedo_texture = ExtResource("13_v14ny")
@@ -206,11 +209,11 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_m7o13"]
 material = SubResource("StandardMaterial3D_6lvxt")
-size = Vector2(0.03, 0.002)
+size = Vector2(0.08, 0.006)
 orientation = 0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_p2hpd"]
-radius = 0.0216049
+radius = 0.05
 
 [node name="SaunaScene" type="Node3D"]
 script = ExtResource("1_upwxg")
@@ -230,6 +233,7 @@ shape = SubResource("BoxShape3D_um7xg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("PlaneMesh_s8e8q")
 skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("5_x3pep")
 
 [node name="Ceiling" type="MeshInstance3D" parent="Sauna"]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, -4.37114e-08, -1, -4.37114e-08, -1, 4.37114e-08, 4.37114e-08, 0, 3, 0)
@@ -237,6 +241,7 @@ mesh = SubResource("PlaneMesh_3gnn8")
 
 [node name="Light1" parent="Sauna/Ceiling" instance=ExtResource("5_j335g")]
 transform = Transform3D(1, 5.32907e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -6.39488e-14, 1, -4.37114e-08, -1, 0.08, 1)
+light_energy = 2.0
 
 [node name="Light2" parent="Sauna/Ceiling" instance=ExtResource("5_j335g")]
 transform = Transform3D(1, 6.03961e-14, -8.74228e-08, -8.74228e-08, -4.37114e-08, -1, -7.10543e-14, 1, -4.37114e-08, 1, 0.08, 1)
@@ -372,21 +377,21 @@ surface_material_override/0 = ExtResource("7_rdevi")
 surface_material_override/1 = ExtResource("7_rdevi")
 
 [node name="Bench4" type="CollisionShape3D" parent="Sauna"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2, 0.25, 1.96518)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2, 0.25, 1.76377)
 shape = SubResource("BoxShape3D_2mb67")
 
 [node name="Model" type="MeshInstance3D" parent="Sauna/Bench4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95205, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7519, 0, 0)
 mesh = ExtResource("9_etp48")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("7_rdevi")
 
 [node name="Bench5" type="CollisionShape3D" parent="Sauna"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2, 0.25, -1.67249)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2, 0.25, -1.74544)
 shape = SubResource("BoxShape3D_2mb67")
 
 [node name="Model" type="MeshInstance3D" parent="Sauna/Bench5"]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67668, 0, -4.76837e-07)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74474, 0, -9.53674e-07)
 mesh = ExtResource("9_etp48")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("7_rdevi")
@@ -432,7 +437,7 @@ target_position = Vector3(0, -0.5, 0)
 collision_mask = 4294967295
 
 [node name="Temperature" type="Area3D" parent="Pipe"]
-transform = Transform3D(-3, 0, 4.52987e-07, 0, 3, 0, -4.52987e-07, 0, -3, -2.37212, 1.49, -0.784379)
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -2.37212, 1.49, -0.784379)
 collision_layer = 4294967295
 collision_mask = 0
 script = ExtResource("17_0lpp2")
@@ -442,17 +447,20 @@ stove_path = NodePath("../../Stove")
 transform = Transform3D(1, 0, 0, 0, 0.809017, 0.587785, 0, -0.587785, 0.809017, 0, 0, 0)
 
 [node name="Hand" type="MeshInstance3D" parent="Pipe/Temperature/Pivot"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.00183105, 0, -0.0118713)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.006, 0, -0.032)
 mesh = SubResource("QuadMesh_m7o13")
 
 [node name="ScrewArea" type="CollisionShape3D" parent="Pipe/Temperature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00796509, -0.182983, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0172927, -0.548672, 0.00563174)
 shape = SubResource("SphereShape3D_p2hpd")
+
+[node name="ScrewdriverAnchor" type="Node3D" parent="Pipe/Temperature"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.119205, -0.552499, 0.00532913)
 
 [node name="Stove" parent="." instance=ExtResource("18_dfjaf")]
 
 [node name="ScrewDriver" parent="." instance=ExtResource("10_jhok0")]
-transform = Transform3D(0.0793116, 0, -0.99685, 0, 1, 0, 0.99685, 0, 0.0793116, 0.671458, 0.406309, 0.087864)
+transform = Transform3D(0.0793116, 0, -0.99685, 0, 1, 0, 0.99685, 0, 0.0793116, 0.671458, 0.662852, 0.087864)
 
 [node name="Bucket" parent="." instance=ExtResource("11_k1x68")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68134, 0.199158, -0.778954)
@@ -472,6 +480,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715643, 0.533096, 0.090050
 
 [node name="Cookie4" parent="." instance=ExtResource("20_balac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715643, 0.558731, 0.134484)
+
+[node name="PickableObject" parent="." instance=ExtResource("27_fgqfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05195, 0.559135, 0)
+
+[node name="Bomb" parent="." instance=ExtResource("29_aun1c")]
 
 [connection signal="body_entered" from="Sauna/Bench11/Model/Door/StaticBody3D/KeyDetect" to="Sauna/Bench11/Model/Door" method="_on_key_detect_body_entered"]
 [connection signal="vapor" from="Stove" to="." method="_on_stove_vapor"]
