@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn8r2koi5rku7"]
+
+[ext_resource type="Script" path="res://scenes/common/tool_interactable.gd" id="1_xwmgu"]
+[ext_resource type="Script" path="res://scenes/common/tool_interactable_anchor.gd" id="2_q4cjm"]
+
+[node name="Interactable" type="Area3D"]
+script = ExtResource("1_xwmgu")
+
+[node name="InteractArea" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
+
+[node name="ToolAnchor" type="Node3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("2_q4cjm")

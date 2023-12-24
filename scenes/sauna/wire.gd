@@ -1,5 +1,5 @@
 @tool
-extends Area3D
+extends "res://scenes/common/tool_interactable.gd"
 
 
 @export var color : Color:
@@ -7,5 +7,17 @@ extends Area3D
 		return color
 	set(c):
 		color = c
-		$Wire.get_surface_override_material(0).albedo_color = color
+		set_wire_color(color)
 
+
+func _ready():
+	set_wire_color(color)
+
+func set_wire_color(c : Color):
+	if is_inside_tree():
+		$Wire.get_surface_override_material(0).albedo_color = c
+
+func _do_action(action : String):
+	$Wire.visible = false
+	$WireCut.visible = true
+	$InteractArea.disabled = true

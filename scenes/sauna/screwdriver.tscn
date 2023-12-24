@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://4ev7vligewx2"]
+[gd_scene load_steps=9 format=3 uid="uid://8fniya3wlsef"]
 
-[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_dw6s1"]
+[ext_resource type="PackedScene" uid="uid://c43ft8wmq1el0" path="res://scenes/common/tool.tscn" id="1_uy0qa"]
 [ext_resource type="Script" path="res://scenes/sauna/screwdriver.gd" id="2_0cuxt"]
-[ext_resource type="Script" path="res://scenes/sauna/screwdriver_mesh.gd" id="3_2w4s8"]
 [ext_resource type="ArrayMesh" uid="uid://coo16t6w2daxh" path="res://models/screwdriver.obj" id="3_47rmt"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtqgr"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjrst"]
 radius = 0.0190862
 height = 0.27328
 
@@ -49,16 +48,15 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_617bq"]
 radius = 0.1
 
-[node name="ScrewDriver" instance=ExtResource("1_dw6s1")]
+[node name="ScrewDriver" instance=ExtResource("1_uy0qa")]
 script = ExtResource("2_0cuxt")
+action_name = "screw"
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(0.926048, -0.0160715, 0.377063, 0.377116, 0.000273449, -0.926166, 0.0147817, 0.999871, 0.00631404, -2.93255e-05, 0.0017238, 0.00172305)
-shape = SubResource("CapsuleShape3D_gtqgr")
+shape = SubResource("CapsuleShape3D_tjrst")
 
-[node name="Mesh" type="Node3D" parent="." index="1"]
+[node name="Mesh" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-script = ExtResource("3_2w4s8")
 
 [node name="Mesh" type="MeshInstance3D" parent="Mesh" index="0"]
 transform = Transform3D(1, 0, 4.46638e-06, 0, 1, 0, -4.46638e-06, 0, 1, 2.93255e-05, 0.00172278, -0.00172305)
@@ -71,12 +69,6 @@ libraries = {
 "": SubResource("AnimationLibrary_mgaxq")
 }
 
-[node name="ScrewArea" type="Area3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.127808)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ScrewArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.032959)
+[node name="CollisionShape3D" parent="InteractArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.130127)
 shape = SubResource("SphereShape3D_617bq")
-
-[connection signal="area_entered" from="ScrewArea" to="." method="_on_screw_area_area_entered"]
-[connection signal="area_exited" from="ScrewArea" to="." method="_on_screw_area_area_exited"]

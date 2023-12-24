@@ -1,12 +1,12 @@
-extends XRToolsPickable
+extends "res://scenes/common/tool.gd"
 
 
-@onready var mesh = $Mesh
+@onready var animation_player = $Mesh/AnimationPlayer
 
 
 func do_action(state : bool):
 	if state:
-		mesh.cut()
-		for o in $CutArea.get_overlapping_areas():
-			if o.has_method("cut"):
-				o.screw()
+		if animation_player.is_playing():
+			return
+		animation_player.play("cut")
+	super.do_action(state)

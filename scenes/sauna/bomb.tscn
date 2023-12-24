@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/sauna/bomb.gd" id="1_c7sg3"]
 [ext_resource type="ArrayMesh" uid="uid://8du5xve8p6ru" path="res://models/bomb.obj" id="1_tqyqa"]
 [ext_resource type="PackedScene" uid="uid://dfh2bxas4onmk" path="res://scenes/sauna/seven_segments.tscn" id="2_obcgt"]
-[ext_resource type="PackedScene" uid="uid://08cobamsesx0" path="res://scenes/sauna/wire.tscn" id="4_ttjas"]
+[ext_resource type="PackedScene" uid="uid://cr0fdid4hde8c" path="res://scenes/sauna/wire.tscn" id="4_ttjas"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_64ap6"]
 radius = 0.01
@@ -47,11 +47,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0355894, -0.0549547, 0.0923
 mesh = SubResource("SphereMesh_64ap6")
 surface_material_override/0 = SubResource("StandardMaterial3D_nh08n")
 
-[node name="Lamp" type="OmniLight3D" parent="Light"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00198435, 0.00280064, 0.0144775)
-visible = false
-omni_range = 0.5
-
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
@@ -83,16 +78,28 @@ mesh = SubResource("CylinderMesh_ct8tv")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05825e-09, 0.0712555, -0.0384213)
 mesh = SubResource("CylinderMesh_ct8tv")
 
-[node name="Wire1" parent="." instance=ExtResource("4_ttjas")]
-transform = Transform3D(0.863888, 0, -0.503684, 0, 1, 0, 0.503684, 0, 0.863888, -0.149518, -0.0650983, 0.0926455)
-color = Color(0.870588, 0, 0.0588235, 1)
-
-[node name="Wire2" parent="." instance=ExtResource("4_ttjas")]
-transform = Transform3D(0.98401, 0, -0.178116, -0.0222221, 0.992187, -0.122767, 0.176724, 0.124762, 0.976321, 0.0061269, -0.0731681, 0.0926455)
+[node name="WireB" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(0.978286, -0.111243, -0.174878, 0.124678, 0.98988, 0.0677796, 0.165568, -0.0881113, 0.982254, 0.0061269, -0.0731681, 0.0926455)
 color = Color(0.027451, 0, 0.870588, 1)
 
-[node name="Wire3" parent="." instance=ExtResource("4_ttjas")]
-transform = Transform3D(0.971165, -0.199488, -0.130546, 0.178511, 0.97142, -0.156448, 0.158025, 0.128633, 0.979021, 0.15032, -0.0731681, 0.0926455)
+[node name="WireO" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(-0.969821, 0.149087, 0.192928, -0.109502, -0.973309, 0.201685, 0.217847, 0.174473, 0.960261, -0.152444, 0.0784541, 0.055519)
+color = Color(1, 0.490196, 0, 1)
+
+[node name="WireR" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(0.999354, 0.00756022, -0.0351426, 0, 0.977633, 0.210318, 0.0359466, -0.210182, 0.977001, -0.149518, -0.0650983, 0.0926455)
+color = Color(0.870588, 0, 0.0588235, 1)
+
+[node name="WireG" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(0.971165, -0.1881, -0.146479, 0.178511, 0.980983, -0.0761882, 0.158025, 0.0478433, 0.986276, 0.15032, -0.0731681, 0.0926455)
 color = Color(0.145098, 0.870588, 0, 1)
+
+[node name="WireW" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(-0.996518, -0.083071, -0.00715269, 0.0819849, -0.991873, 0.0972932, -0.0151762, 0.096368, 0.99523, 0.15032, 0.0788376, 0.0604371)
+color = Color(1, 1, 1, 1)
+
+[node name="WireY" parent="." instance=ExtResource("4_ttjas")]
+transform = Transform3D(-0.997616, 0.0222916, -0.0653059, -0.0318186, -0.988375, 0.148667, -0.0612322, 0.15039, 0.986729, 0.0159397, 0.0746514, 0.055519)
+color = Color(1, 1, 0, 1)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

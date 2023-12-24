@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c6q1l5fnlrdp6"]
+[gd_scene load_steps=64 format=3 uid="uid://c6q1l5fnlrdp6"]
 
 [ext_resource type="Texture2D" uid="uid://v66qp1vygenk" path="res://models/floor_albedo.png" id="1_rf5f1"]
 [ext_resource type="Script" path="res://scenes/sauna/sauna_scene.gd" id="1_upwxg"]
@@ -16,19 +16,22 @@
 [ext_resource type="ArrayMesh" uid="uid://bol7uo6wtc66" path="res://models/bench3.obj" id="9_etp48"]
 [ext_resource type="Texture2D" uid="uid://bqsh0j0mdh6cq" path="res://models/door_writing.png" id="9_jleff"]
 [ext_resource type="ArrayMesh" uid="uid://cwjam85vhc3fy" path="res://models/bench2_key.obj" id="9_oh2g6"]
-[ext_resource type="PackedScene" uid="uid://4ev7vligewx2" path="res://scenes/sauna/screwdriver.tscn" id="10_jhok0"]
+[ext_resource type="PackedScene" uid="uid://8fniya3wlsef" path="res://scenes/sauna/screwdriver.tscn" id="10_jhok0"]
 [ext_resource type="PackedScene" uid="uid://c6rlrrlkumljy" path="res://scenes/sauna/bucket.tscn" id="11_k1x68"]
 [ext_resource type="ArrayMesh" uid="uid://cxj7cmrceew7v" path="res://models/pipe.obj" id="12_4skkf"]
 [ext_resource type="Texture2D" uid="uid://dybplhqr3d28i" path="res://models/sauna_t.png" id="13_v14ny"]
 [ext_resource type="Script" path="res://scenes/sauna/tap.gd" id="14_4ihj0"]
 [ext_resource type="Texture2D" uid="uid://dsh13vdmh2jsk" path="res://models/particle.png" id="15_c1uw8"]
 [ext_resource type="ArrayMesh" uid="uid://b6k3sbjjxxh4m" path="res://models/tap.obj" id="16_0vwsa"]
+[ext_resource type="PackedScene" uid="uid://dgxkp7vb3nxak" path="res://scenes/sauna/key.tscn" id="16_lr1ip"]
 [ext_resource type="Script" path="res://scenes/sauna/temperature.gd" id="17_0lpp2"]
 [ext_resource type="PackedScene" uid="uid://c5ep1hnxt2pjq" path="res://scenes/sauna/stove.tscn" id="18_dfjaf"]
 [ext_resource type="PackedScene" uid="uid://rjm4fpxp6tny" path="res://scenes/sauna/bottle.tscn" id="19_kx2xb"]
 [ext_resource type="PackedScene" uid="uid://b0xm6b1pl5sfx" path="res://scenes/sauna/cookie.tscn" id="20_balac"]
-[ext_resource type="PackedScene" uid="uid://60hpvwrkcwd1" path="res://scenes/sauna/pliers.tscn" id="27_fgqfk"]
+[ext_resource type="PackedScene" uid="uid://dn8r2koi5rku7" path="res://scenes/common/tool_interactable.tscn" id="23_y511u"]
+[ext_resource type="PackedScene" uid="uid://hr4sc7ynu7fg" path="res://scenes/sauna/pliers.tscn" id="27_fgqfk"]
 [ext_resource type="PackedScene" uid="uid://c63q1llxbb4op" path="res://scenes/sauna/bomb.tscn" id="29_aun1c"]
+[ext_resource type="PackedScene" uid="uid://b12wsemdfbn5i" path="res://scenes/sauna/stove_door.tscn" id="32_bfbla"]
 
 [sub_resource type="Gradient" id="Gradient_d47og"]
 colors = PackedColorArray(0.666569, 0.666569, 0.666569, 0, 0.877616, 0.877616, 0.877616, 1)
@@ -87,8 +90,9 @@ size = Vector3(2.524, 0.53, 0.6)
 [sub_resource type="BoxShape3D" id="BoxShape3D_tlwng"]
 size = Vector3(0.53, 0.025, 0.475)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_yspcd"]
-radius = 0.0490527
+[sub_resource type="SphereShape3D" id="SphereShape3D_1d78a"]
+margin = 0.001
+radius = 0.04
 
 [sub_resource type="Animation" id="Animation_7dt3c"]
 length = 0.001
@@ -203,6 +207,9 @@ _data = {
 "turn": SubResource("Animation_2smys")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_gj3l7"]
+radius = 0.05
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lvxt"]
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
@@ -211,9 +218,6 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_6lvxt")
 size = Vector2(0.08, 0.006)
 orientation = 0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_p2hpd"]
-radius = 0.05
 
 [node name="SaunaScene" type="Node3D"]
 script = ExtResource("1_upwxg")
@@ -325,14 +329,18 @@ transform = Transform3D(-4.37113e-08, 0.999998, -8.74226e-08, -0.999998, -4.3711
 visible = false
 mesh = ExtResource("9_oh2g6")
 
-[node name="KeyDetect" type="Area3D" parent="Sauna/Bench11/Model/Door/StaticBody3D"]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, -4.9738e-14, 0, 1, 0.44519, 0.057312, 3.72529e-08)
-collision_mask = 4294967295
-monitorable = false
+[node name="Interactable" parent="Sauna/Bench11/Model/Door/StaticBody3D" instance=ExtResource("23_y511u")]
+transform = Transform3D(1, 0, -3.55271e-14, 0, 1, 0, 2.13163e-14, 0, 1, 0.444937, 0.0167831, 0.00232098)
+action_name = "unlock"
+signal_delay = 1.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sauna/Bench11/Model/Door/StaticBody3D/KeyDetect"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0.0012207, 0)
-shape = SubResource("SphereShape3D_yspcd")
+[node name="InteractArea" parent="Sauna/Bench11/Model/Door/StaticBody3D/Interactable" index="0"]
+shape = SubResource("SphereShape3D_1d78a")
+
+[node name="ToolAnchor" parent="Sauna/Bench11/Model/Door/StaticBody3D/Interactable" index="1"]
+transform = Transform3D(-4.37113e-08, -1, 0, -4.37113e-08, 3.55271e-15, 1, -0.999999, 4.37114e-08, -4.37114e-08, 0, 0.00833619, 0)
+show_tool = true
+tool_scene = ExtResource("16_lr1ip")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sauna/Bench11/Model/Door"]
 libraries = {
@@ -344,7 +352,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15923, 0.25, 2.2)
 shape = SubResource("BoxShape3D_ejk7e")
 
 [node name="Bench13" type="CollisionShape3D" parent="Sauna"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.808283, 0.119385, 2.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.808283, 0.105143, 2.2)
 shape = SubResource("BoxShape3D_ejk7e")
 
 [node name="Bench14" type="CollisionShape3D" parent="Sauna"]
@@ -436,10 +444,19 @@ transform = Transform3D(1, 0, -8.52651e-14, 0, 1, 0, 8.52651e-14, 0, 1, -0.05570
 target_position = Vector3(0, -0.5, 0)
 collision_mask = 4294967295
 
-[node name="Temperature" type="Area3D" parent="Pipe"]
+[node name="ScrewArea" parent="Pipe" instance=ExtResource("23_y511u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3818, 0.937496, -0.790345)
+action_name = "screw"
+
+[node name="InteractArea" parent="Pipe/ScrewArea" index="0"]
+shape = SubResource("SphereShape3D_gj3l7")
+
+[node name="ToolAnchor" parent="Pipe/ScrewArea" index="1"]
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 1, 0, -0.999999, 0, -4.37114e-08, 0.131318, 0, 0)
+tool_scene = ExtResource("10_jhok0")
+
+[node name="Temperature" type="Node3D" parent="Pipe"]
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -2.37212, 1.49, -0.784379)
-collision_layer = 4294967295
-collision_mask = 0
 script = ExtResource("17_0lpp2")
 stove_path = NodePath("../../Stove")
 
@@ -450,17 +467,10 @@ transform = Transform3D(1, 0, 0, 0, 0.809017, 0.587785, 0, -0.587785, 0.809017, 
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.006, 0, -0.032)
 mesh = SubResource("QuadMesh_m7o13")
 
-[node name="ScrewArea" type="CollisionShape3D" parent="Pipe/Temperature"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0172927, -0.548672, 0.00563174)
-shape = SubResource("SphereShape3D_p2hpd")
-
-[node name="ScrewdriverAnchor" type="Node3D" parent="Pipe/Temperature"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.119205, -0.552499, 0.00532913)
-
 [node name="Stove" parent="." instance=ExtResource("18_dfjaf")]
 
 [node name="ScrewDriver" parent="." instance=ExtResource("10_jhok0")]
-transform = Transform3D(0.0793116, 0, -0.99685, 0, 1, 0, 0.99685, 0, 0.0793116, 0.671458, 0.662852, 0.087864)
+transform = Transform3D(0.0793116, 0, -0.99685, 0, 1, 0, 0.99685, 0, 0.0793116, 0.671458, 0.391919, 0.087864)
 
 [node name="Bucket" parent="." instance=ExtResource("11_k1x68")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68134, 0.199158, -0.778954)
@@ -482,9 +492,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715643, 0.533096, 0.090050
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715643, 0.558731, 0.134484)
 
 [node name="PickableObject" parent="." instance=ExtResource("27_fgqfk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05195, 0.559135, 0)
+transform = Transform3D(-0.0204539, 0, -0.999791, 0, 1, 0, 0.999791, 0, -0.0204539, 0.67143, 0.390168, 0.235003)
 
 [node name="Bomb" parent="." instance=ExtResource("29_aun1c")]
 
-[connection signal="body_entered" from="Sauna/Bench11/Model/Door/StaticBody3D/KeyDetect" to="Sauna/Bench11/Model/Door" method="_on_key_detect_body_entered"]
+[node name="StoveDoorLock" parent="." instance=ExtResource("23_y511u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.00849935, 0.48785, -1.3721)
+action_name = "screw"
+
+[node name="InteractArea" parent="StoveDoorLock" index="0"]
+shape = SubResource("SphereShape3D_gj3l7")
+
+[node name="ToolAnchor" parent="StoveDoorLock" index="1"]
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 1, 0, -0.999999, 0, -4.37114e-08, 0.121243, -0.0016287, 9.31323e-10)
+show_tool = true
+tool_scene = ExtResource("10_jhok0")
+
+[node name="StoveDoor" parent="." instance=ExtResource("32_bfbla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.347, -1.384)
+enabled = false
+
+[connection signal="on_action" from="Sauna/Bench11/Model/Door/StaticBody3D/Interactable" to="Sauna/Bench11/Model/Door" method="_on_interactable_on_action"]
+[connection signal="on_action" from="Pipe/ScrewArea" to="Pipe/Temperature" method="_on_screw_area_on_action"]
 [connection signal="vapor" from="Stove" to="." method="_on_stove_vapor"]
+
+[editable path="Sauna/Bench11/Model/Door/StaticBody3D/Interactable"]
+[editable path="Pipe/ScrewArea"]
+[editable path="StoveDoorLock"]

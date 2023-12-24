@@ -1,20 +1,72 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwvcgyt84kmxd"]
+[gd_scene load_steps=9 format=3 uid="uid://dgxkp7vb3nxak"]
 
-[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_80t3m"]
+[ext_resource type="PackedScene" uid="uid://c43ft8wmq1el0" path="res://scenes/common/tool.tscn" id="1_ccmfh"]
+[ext_resource type="Script" path="res://scenes/sauna/key.gd" id="2_1j2y3"]
 [ext_resource type="ArrayMesh" uid="uid://cwjam85vhc3fy" path="res://models/bench2_key.obj" id="2_rwd1m"]
-[ext_resource type="Script" path="res://scenes/sauna/key.gd" id="2_w1ulw"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jro25"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o7r7w"]
 margin = 0.001
 size = Vector3(0.055, 0.02, 0.08)
 
-[node name="Key" instance=ExtResource("1_80t3m")]
-script = ExtResource("2_w1ulw")
+[sub_resource type="Animation" id="Animation_2ctwd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vj3gj"]
+resource_name = "turn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.0944, 0, 0), Vector3(-2.0944, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k1uv2"]
+_data = {
+"RESET": SubResource("Animation_2ctwd"),
+"turn": SubResource("Animation_vj3gj")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pga5y"]
+margin = 0.001
+radius = 0.04
+
+[node name="Key" instance=ExtResource("1_ccmfh")]
+script = ExtResource("2_1j2y3")
+action_name = "unlock"
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.32392e-05)
-shape = SubResource("BoxShape3D_jro25")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_o7r7w")
 
-[node name="Mesh" type="MeshInstance3D" parent="." index="1"]
+[node name="Mesh" parent="." index="1"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Mesh" index="0"]
 mesh = ExtResource("2_rwd1m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mesh" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_k1uv2")
+}
+
+[node name="CollisionShape3D" parent="InteractArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0407952)
+shape = SubResource("SphereShape3D_pga5y")

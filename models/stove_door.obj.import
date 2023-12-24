@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://3suehukrgh21"
+path="res://.godot/imported/stove_door.obj-3c18084cc29f82073bea332dc59691cb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/stove_door.obj-3c18084cc29f82073bea332dc59691cb.mesh"]
+
+source_file="res://models/stove_door.obj"
+dest_files=["res://.godot/imported/stove_door.obj-3c18084cc29f82073bea332dc59691cb.mesh", "res://.godot/imported/stove_door.obj-3c18084cc29f82073bea332dc59691cb.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

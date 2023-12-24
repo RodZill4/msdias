@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b12wsemdfbn5i"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_xgesi"]
+[ext_resource type="ArrayMesh" uid="uid://3suehukrgh21" path="res://models/stove_door.obj" id="2_rxjs6"]
+[ext_resource type="Material" uid="uid://brmkofkf64u5r" path="res://models/walls.tres" id="3_xr4n5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_poxml"]
+size = Vector3(0.425, 0.355, 0.02)
+
+[node name="StoveDoor" instance=ExtResource("1_xgesi")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_poxml")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("2_rxjs6")
+surface_material_override/0 = ExtResource("3_xr4n5")

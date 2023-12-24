@@ -34,7 +34,8 @@ func _ready():
 	
 	set_process(false)
 	
-	load_scene("res://scenes/restart/restart_scene.tscn", "title")
+	#load_scene("res://scenes/restart/restart_scene.tscn", "title")
+	load_scene("res://scenes/sauna/sauna_scene.tscn")
 
 # Handle OpenXR session ready
 func _on_openxr_session_begun() -> void:

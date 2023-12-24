@@ -1,34 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://08cobamsesx0"]
+[gd_scene load_steps=8 format=3 uid="uid://cr0fdid4hde8c"]
 
+[ext_resource type="PackedScene" uid="uid://dn8r2koi5rku7" path="res://scenes/common/tool_interactable.tscn" id="1_2d3kq"]
 [ext_resource type="ArrayMesh" uid="uid://n1k4d4tdyobt" path="res://models/wire.obj" id="1_o3jaf"]
 [ext_resource type="Script" path="res://scenes/sauna/wire.gd" id="1_ulsxh"]
 [ext_resource type="ArrayMesh" uid="uid://dvonr3mag031g" path="res://models/wire_cut.obj" id="2_2yfyo"]
+[ext_resource type="PackedScene" uid="uid://hr4sc7ynu7fg" path="res://scenes/sauna/pliers.tscn" id="3_g7am6"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_5bc2m"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_vfxwe"]
 radius = 0.035
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ojtb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bo4co"]
 resource_local_to_scene = true
-albedo_color = Color(0.0745098, 0, 0.988235, 1)
+albedo_color = Color(0, 0, 0, 1)
 
-[node name="Wire" type="Area3D"]
-transform = Transform3D(0.863888, 0, -0.503684, 0, 1, 0, 0.503684, 0, 0.863888, -0.149518, -0.0731717, 0.0926455)
+[node name="Wire" instance=ExtResource("1_2d3kq")]
 script = ExtResource("1_ulsxh")
-color = Color(0.0745098, 0, 0.988235, 1)
+color = Color(0, 0, 0, 1)
+action_name = "cut"
 
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00771737, 0, 0.0132363)
-shape = SubResource("SphereShape3D_5bc2m")
+[node name="InteractArea" parent="." index="0"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 4.24379e-10, 0, 0.0142398)
+shape = SubResource("SphereShape3D_vfxwe")
 
-[node name="Anchor" type="Node3D" parent="."]
+[node name="ToolAnchor" parent="." index="1"]
+transform = Transform3D(0.999999, 6.30653e-08, 1.01161e-07, 0, 0.848603, -0.529031, -1.19209e-07, 0.529031, 0.848602, 0.002, -0.044, 0.062)
+show_tool = false
+tool_scene = ExtResource("3_g7am6")
 
-[node name="Wire" type="MeshInstance3D" parent="."]
+[node name="Wire" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(-4.37114e-08, -2.16999e-18, -1, -0.997994, -0.0633131, 4.36237e-08, -0.0633131, 0.997994, 2.76751e-09, 0, -0.00631112, -0.0385888)
 mesh = ExtResource("1_o3jaf")
-surface_material_override/0 = SubResource("StandardMaterial3D_8ojtb")
+surface_material_override/0 = SubResource("StandardMaterial3D_bo4co")
 
-[node name="WireCut" type="MeshInstance3D" parent="."]
+[node name="WireCut" type="MeshInstance3D" parent="." index="3"]
 transform = Transform3D(-4.37114e-08, -2.16999e-18, -1, -0.997994, -0.0633131, 4.36237e-08, -0.0633131, 0.997994, 2.76751e-09, 0, -0.00631112, -0.0385888)
 visible = false
 mesh = ExtResource("2_2yfyo")
-surface_material_override/0 = SubResource("StandardMaterial3D_8ojtb")
+surface_material_override/0 = SubResource("StandardMaterial3D_bo4co")

@@ -14,7 +14,7 @@ func _ready():
 func angle_from_temperature(t : float) -> float:
 	return -36.8+(t-30)*(138+36.8)/(110-30)
 
-func screw():
+func _on_screw_area_on_action(action):
 	increase = -5.0
 
 func get_interaction_anchor(action : String):
